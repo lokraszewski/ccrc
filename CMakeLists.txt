@@ -14,10 +14,9 @@ include_directories ("${PROJECT_BINARY_DIR}/catch")
 
 set(SOURCE
    ${SOURCE}
-   # ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp-crc.cpp
 )
 
 
-add_executable (cpp-test0 ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/test0/main.cpp)
+add_executable (unit_tests ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests/unit.cpp)
 # add_executable(cpp-crc )
 
