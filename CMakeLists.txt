@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "g++")
-
+set(CMAKE_CXX_STANDARD 17)
 
 project (cpp-crc)
 
@@ -10,15 +8,16 @@ project (cpp-crc)
 
 
 #Bring the headers, such as Student.h into the project
-# include_directories(CMAKE_SOURCE_DIR)
-include_directories ("${PROJECT_BINARY_DIR}")
+include_directories ("${PROJECT_BINARY_DIR}/src")
+include_directories ("${PROJECT_BINARY_DIR}/catch")
 
-#Can manually add the sources using the set command as follows:
-#set(SOURCES src/mainapp.cpp src/Student.cpp)
 
-#However, the file(GLOB...) allows for wildcard additions:
-# file(GLOB HEADERS "*h")
-file(GLOB SOURCES "*.cpp")
+set(SOURCE
+   ${SOURCE}
+   # ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp-crc.cpp
+)
 
-add_executable(cpp-crc ${SOURCES})
+
+add_executable (cpp-test0 ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/test0/main.cpp)
+# add_executable(cpp-crc )
 

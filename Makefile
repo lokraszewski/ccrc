@@ -111,71 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named cpp-crc
+# Target rules for targets named cpp-test0
 
 # Build rule for target.
-cpp-crc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cpp-crc
-.PHONY : cpp-crc
+cpp-test0: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cpp-test0
+.PHONY : cpp-test0
 
 # fast build rule for target.
-cpp-crc/fast:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/build
-.PHONY : cpp-crc/fast
+cpp-test0/fast:
+	$(MAKE) -f CMakeFiles/cpp-test0.dir/build.make CMakeFiles/cpp-test0.dir/build
+.PHONY : cpp-test0/fast
 
-cpp-crc.o: cpp-crc.cpp.o
+test0/main.o: test0/main.cpp.o
 
-.PHONY : cpp-crc.o
-
-# target to build an object file
-cpp-crc.cpp.o:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/cpp-crc.cpp.o
-.PHONY : cpp-crc.cpp.o
-
-cpp-crc.i: cpp-crc.cpp.i
-
-.PHONY : cpp-crc.i
-
-# target to preprocess a source file
-cpp-crc.cpp.i:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/cpp-crc.cpp.i
-.PHONY : cpp-crc.cpp.i
-
-cpp-crc.s: cpp-crc.cpp.s
-
-.PHONY : cpp-crc.s
-
-# target to generate assembly for a file
-cpp-crc.cpp.s:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/cpp-crc.cpp.s
-.PHONY : cpp-crc.cpp.s
-
-main.o: main.cpp.o
-
-.PHONY : main.o
+.PHONY : test0/main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/main.cpp.o
-.PHONY : main.cpp.o
+test0/main.cpp.o:
+	$(MAKE) -f CMakeFiles/cpp-test0.dir/build.make CMakeFiles/cpp-test0.dir/test0/main.cpp.o
+.PHONY : test0/main.cpp.o
 
-main.i: main.cpp.i
+test0/main.i: test0/main.cpp.i
 
-.PHONY : main.i
+.PHONY : test0/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/main.cpp.i
-.PHONY : main.cpp.i
+test0/main.cpp.i:
+	$(MAKE) -f CMakeFiles/cpp-test0.dir/build.make CMakeFiles/cpp-test0.dir/test0/main.cpp.i
+.PHONY : test0/main.cpp.i
 
-main.s: main.cpp.s
+test0/main.s: test0/main.cpp.s
 
-.PHONY : main.s
+.PHONY : test0/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/cpp-crc.dir/build.make CMakeFiles/cpp-crc.dir/main.cpp.s
-.PHONY : main.cpp.s
+test0/main.cpp.s:
+	$(MAKE) -f CMakeFiles/cpp-test0.dir/build.make CMakeFiles/cpp-test0.dir/test0/main.cpp.s
+.PHONY : test0/main.cpp.s
 
 # Help Target
 help:
@@ -184,14 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... cpp-crc"
+	@echo "... cpp-test0"
 	@echo "... edit_cache"
-	@echo "... cpp-crc.o"
-	@echo "... cpp-crc.i"
-	@echo "... cpp-crc.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... test0/main.o"
+	@echo "... test0/main.i"
+	@echo "... test0/main.s"
 .PHONY : help
 
 

@@ -1,1 +1,0 @@
-/usr/bin/g++    -rdynamic CMakeFiles/cpp-crc.dir/cpp-crc.cpp.o CMakeFiles/cpp-crc.dir/main.cpp.o  -o cpp-crc 
