@@ -1,4 +1,7 @@
 CMakeFiles/*
+bin/*
+
 *.txt
+!CMakeLists.txt
 Makefile
 *.cmake
