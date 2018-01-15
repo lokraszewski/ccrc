@@ -22,6 +22,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * Implement the fast algorithm based on a look-up table.
 * Consider removing the need to instanciate the object before getting a CRC. 
 * Add std containers support (std::array && std::vector). 
+* Add benchmarking. Currently considering [Google Benchmark](https://github.com/google/benchmark). This is for comparison of slow and fast algorithms but also for any future code changes (part of testing). 
 
 ## License
 
