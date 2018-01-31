@@ -24,7 +24,6 @@ template<class T> T reverse(T n)
 };
 
 /* Add specializations here for super fast reverse. */
-
 template<> uint32_t reverse(uint32_t n)
 {
 	n = ((n >> 1) & 0x55555555) | ((n << 1) & 0xaaaaaaaa);

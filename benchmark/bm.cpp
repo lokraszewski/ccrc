@@ -21,32 +21,45 @@
 #include <set>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include <thread>
 #include <utility>
 #include <vector>
 
-// static void BM_StringCreation(benchmark::State &state)
-// {
-	// for (auto _ : state)
-		// std::string empty_string;
-// }
-// Register the function as a benchmark
-// BENCHMARK(BM_StringCreation);
+#include "cpp-crc.hpp"
 
-// Define another benchmark
-static void BM_StringCopy(benchmark::State &state)
+static void BM_slow_crc32(benchmark::State &state)
 {
-	std::string x = "hello";
+	using namespace cpp_crc::slow;
+	uint8_t *data = new uint8_t[state.range(0)];
+	memset(data, 'x', state.range(0));
+
+	crc<uint32_t> c32(0x4C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true );
 
 	for (auto _ : state)
-		std::string copy(x);
+		benchmark::DoNotOptimize(c32.get(data, state.range(0)));
+
+	state.SetComplexityN(state.range(0));
+
+	delete[] data;
 }
-BENCHMARK(BM_StringCopy);
+BENCHMARK(BM_slow_crc32)->RangeMultiplier(2)->Range(8, 1<<18)->Complexity(benchmark::oN);
+
+static void BM_slow_crc8(benchmark::State &state)
+{
+	using namespace cpp_crc::slow;
+	uint8_t *data = new uint8_t[state.range(0)];
+	memset(data, 'x', state.range(0));
+
+	crc<uint8_t> c8(0x07, 0x00, 0x00, false, false);
+
+	for (auto _ : state)
+		benchmark::DoNotOptimize(c8.get(data, state.range(0)));
+
+	state.SetComplexityN(state.range(0));
+
+	delete[] data;
+}
+BENCHMARK(BM_slow_crc8)->RangeMultiplier(2)->Range(8, 1<<18)->Complexity(benchmark::oN);
 
 BENCHMARK_MAIN();
-
-// int main(int argc, char const *argv[])
-// {
-// 	/* code */
-// 	return 0;
-// }

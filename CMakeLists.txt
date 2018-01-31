@@ -40,9 +40,3 @@ add_executable (unit_tests ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests/uni
 
 add_executable (bm ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bm.cpp)
 target_link_libraries(bm benchmark ${CMAKE_THREAD_LIBS_INIT})
-# target_link_libraries(bm Threads ${CMAKE_THREAD_LIBS_INIT})
-
-# target_compile_options(bm PRIVATE "-lbenchmark -pthread")
-# target_link_libraries (bm benchmark)
-# add_executable(cpp-crc )
-

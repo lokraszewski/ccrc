@@ -11,17 +11,6 @@
 
 #include "bitop.hpp"
 
-/*
-
-	- IDEA 1: Make this entire shit static. So it could be used in the following way:
-
-
-		crc::crc<uint16_t> crc16(0x8005, 0x0000); // Create a crc16 instance.
-
-		uint8_t some_data[10212];
-
-		auto cs = crc16::get(some_data, sizeof some_data);
- */
 #ifndef _CPP_CEC_H_
 #define _CPP_CEC_H_ 0
 
@@ -37,7 +26,7 @@ private:
 
 protected:
 	const CRC_TYPE m_poly;
-	const CRC_TYPE m_seed; /* this stores the seed that the class was initlized with. */
+	const CRC_TYPE m_seed;
 	const CRC_TYPE m_xor;
 
 	const bool m_ref_in;
@@ -55,15 +44,6 @@ public:
 		WIDTH(8 * sizeof(CRC_TYPE)),
 		TOP_BIT((1 << (WIDTH - 1)))
 	{
-		// std::cout << " PARAM " << std::hex
-		// << "m_poly : 0x" << m_poly
-		// << "m_seed : 0x" << m_seed
-		// << "m_xor : 0x" << m_xor
-		// << "m_ref_in : 0x" << m_ref_in
-		// << "m_ref_out : 0x" << m_ref_out
-		// << "WIDTH : 0x" << WIDTH
-		// << "TOP_BIT : 0x" << TOP_BIT
-		// << std::endl;
 	}
 
 	const CRC_TYPE get_seed() const
@@ -84,8 +64,6 @@ public:
 	CRC_TYPE get(uint8_t *data, uint32_t len, const CRC_TYPE seed)
 	{
 		CRC_TYPE crc = seed;
-
-		// std::cout << std::hex << "0x" << unsigned(crc) << " ";
 
 		while (len--)
 		{
@@ -111,7 +89,6 @@ public:
 				}
 			}
 
-			// std::cout << std::hex << "0x" << unsigned(crc) << " ";
 		}
 
 		if(m_ref_out)
@@ -133,18 +110,5 @@ namespace fast
 }
 
 }
-
-/* Usage ::
-
-
-
-	crc::get<>
-
-
-
-
- */
-
-
 
 #endif
