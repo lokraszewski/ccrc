@@ -1,6 +1,7 @@
 # cpp-crc
 
-A simple header only CRC class.
+A simple header only CRC class. Currently only supports a naive algorithm (slow) and raw pointers. 
+
 
 ### Prerequisites
 * [cmake](https://cmake.org/)
@@ -37,8 +38,9 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## TODOs
 * Implement the fast algorithm based on a look-up table.
-* Consider removing the need to instanciate the object before getting a CRC.
-* Add all remaining benchmarks.
+* Consider removing the need to instanciate the object before getting a CRC. 
+* Add std containers support (std::array && std::vector). 
+
 
 ## License
 
