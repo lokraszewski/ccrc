@@ -50,4 +50,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * [sunshine2k](http://www.sunshine2k.de/coding/javascript/crc/crc_js.html) - Online CRC calculator used to confirm checksums with all the neccearry pre-defined checksums.
 
-See also the list of [contributors](https://github.com/your/cpp-crc/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/lokraszewski/cpp-crc/contributors) who participated in this project.
