@@ -104,7 +104,7 @@ public:
 	}
 };
 
-}
+} /* slow */
 
 namespace fast
 {
@@ -112,10 +112,12 @@ template<typename CRC_TYPE>
 class crc
 {
 private:
-	void init_table(void)
+	constexpr std::array<CRC_TYPE, 0x100> init_table(void)
 	{
+        std::array<CRC_TYPE, 0x100> r;
+
 		for (auto d = 0; d < 0x100; ++d)
-		{
+     	{
 			/*
 			 * Start with the dividend followed by zeros.
 			 */
@@ -142,8 +144,10 @@ private:
 			/*
 			 * Store the result into the table.
 			 */
-			m_table[d] = rem;
+			r[d] = rem;
 		}
+
+        return r;
 	}
 protected:
 	const CRC_TYPE m_poly;
@@ -155,7 +159,7 @@ protected:
 	const size_t WIDTH;
 	const CRC_TYPE TOP_BIT;
 
-	CRC_TYPE  m_table[0x100];
+	const std::array<CRC_TYPE, 0x100> m_table;
 
 public:
 	crc(const CRC_TYPE poly,
@@ -169,9 +173,9 @@ public:
 		m_ref_in(RefIn),
 		m_ref_out(RefOut),
 		WIDTH(8 * sizeof(CRC_TYPE)),
-		TOP_BIT((1 << (WIDTH - 1)))
+		TOP_BIT((1 << (WIDTH - 1))),
+		m_table(init_table())
 	{
-		init_table();
 	}
 
 	const CRC_TYPE get_seed() const
@@ -197,13 +201,13 @@ public:
 		{
 			if (m_ref_in)
 			{
-				*data = bitop::reverse(*data) ^ (crc >> (WIDTH - 8));
-				crc = m_table[*data++] ^ (crc << 8);
+				const auto d = bitop::reverse(*data++) ^ (crc >> (WIDTH - 8));
+				crc = m_table[d] ^ (crc << 8);
 			}
 			else
 			{
-				*data = (*data) ^ (crc >> (WIDTH - 8));
-				crc = m_table[*data++] ^ (crc << 8);
+				const auto d = (*data++) ^ (crc >> (WIDTH - 8));
+				crc = m_table[d] ^ (crc << 8);
 			}
 		}
 
@@ -217,8 +221,8 @@ public:
 		}
 	}
 };
-}
+} /*fast*/
 
-}
+} /*cpp_crc*/
 
 #endif
