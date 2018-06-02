@@ -31,8 +31,9 @@ protected:
 
 	const bool m_ref_in;
 	const bool m_ref_out;
-	const size_t WIDTH;
-	const CRC_TYPE TOP_BIT;
+
+	static constexpr size_t WIDTH		= 8 * sizeof(CRC_TYPE);
+	static constexpr CRC_TYPE TOP_BIT	= (1 << (WIDTH - 1));
 
 public:
 	crc(const CRC_TYPE poly,
@@ -44,9 +45,7 @@ public:
 		m_seed(seed),
 		m_xor(XorOut),
 		m_ref_in(RefIn),
-		m_ref_out(RefOut),
-		WIDTH(8 * sizeof(CRC_TYPE)),
-		TOP_BIT((1 << (WIDTH - 1)))
+		m_ref_out(RefOut)
 	{
 	}
 
@@ -156,8 +155,9 @@ protected:
 
 	const bool m_ref_in;
 	const bool m_ref_out;
-	const size_t WIDTH;
-	const CRC_TYPE TOP_BIT;
+
+	static constexpr size_t WIDTH		= 8 * sizeof(CRC_TYPE);
+	static constexpr CRC_TYPE TOP_BIT	= (1 << (WIDTH - 1));
 
 	const std::array<CRC_TYPE, 0x100> m_table;
 
@@ -172,8 +172,6 @@ public:
 		m_xor(XorOut),
 		m_ref_in(RefIn),
 		m_ref_out(RefOut),
-		WIDTH(8 * sizeof(CRC_TYPE)),
-		TOP_BIT((1 << (WIDTH - 1))),
 		m_table(init_table())
 	{
 	}
