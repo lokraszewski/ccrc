@@ -3,23 +3,15 @@ sudo: required
 language:
   - cpp
 compiler:
-  - gcc
+  - clang
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-6
-      - g++-6
+      - clang-3.5
       - cmake
 script:
-  # Link gcc-6 and g++-6 to their standard commands
-  # Export CC and CXX to tell cmake which compiler to use
-  - export CC=/usr/bin/gcc-6
-  - export CXX=/usr/bin/g++-6
-  # Check versions of gcc, g++ and cmake
-  - gcc -v && g++ -v && cmake --version
-
   - mkdir build && cd build
   - cmake ..
   - make
