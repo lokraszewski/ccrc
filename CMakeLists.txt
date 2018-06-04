@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
-set(CMAKE_C_COMPILER "clang-5.0")
-set(CMAKE_CXX_COMPILER "clang++-5.0")
+set(CMAKE_C_COMPILER "clang")
+set(CMAKE_CXX_COMPILER "clang++")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

@@ -9,7 +9,7 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - clang-5.0
+      - clang
       - cmake
 script:
   - mkdir build && cd build
