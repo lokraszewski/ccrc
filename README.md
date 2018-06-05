@@ -1,5 +1,7 @@
 # cpp-crc
 
+[![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc)
+
 A simple header only CRC class. Currently only supports a naive algorithm (slow) and raw pointers.
 
 
