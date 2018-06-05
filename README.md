@@ -20,10 +20,10 @@ make
 ## Running the tests
 
 ### Unit tests
-Unit tests are located in ./unit_tests and are built on [Catch2](https://github.com/catchorg/Catch2). To run:
+Unit tests are built on [Catch2](https://github.com/catchorg/Catch2). To run:
 
 ```
-build/bin/cpp-test0
+build/bin/unit_tests
 ```
 
 ## Versioning
