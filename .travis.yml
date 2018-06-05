@@ -15,3 +15,6 @@ script:
   - mkdir build && cd build
   - cmake ..
   - make
+
+  # Run the unit tests.
+  - ./bin/unit_tests
