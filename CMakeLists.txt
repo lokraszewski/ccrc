@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
-set(CMAKE_C_COMPILER "clang-5.0")
-set(CMAKE_CXX_COMPILER "clang++-5.0")
+set(CMAKE_C_COMPILER "clang")
+set(CMAKE_CXX_COMPILER "clang++")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -23,7 +23,7 @@ SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "-O2 -g")
 project (cpp-crc)
 
 
-find_package(benchmark REQUIRED)
+# find_package(benchmark REQUIRED)
 find_package (Threads REQUIRED)
 
 set(EXECUTABLE_OUTPUT_PATH "bin")
@@ -38,5 +38,6 @@ set(SOURCE
 
 add_executable (unit_tests ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests/unit.cpp)
 
-add_executable (bm ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bm.cpp)
-target_link_libraries(bm benchmark ${CMAKE_THREAD_LIBS_INIT})
+# add_executable (bm ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bm.cpp)
+# target_link_libraries(bm benchmark ${CMAKE_THREAD_LIBS_INIT})
+
