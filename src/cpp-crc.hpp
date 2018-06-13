@@ -59,24 +59,27 @@ public:
 		return m_poly;
 	}
 
-	CRC_TYPE get(uint8_t *data, uint32_t len)
+	template<typename T>
+	CRC_TYPE get(T data, uint32_t len)
 	{
-		return get(data, len, m_seed);
+		return get(reinterpret_cast<uint8_t*>(data), len, m_seed);
 	}
 
-	CRC_TYPE get(uint8_t *data, uint32_t len, const CRC_TYPE seed)
+	template<typename T>
+	CRC_TYPE get(T data, uint32_t len, const CRC_TYPE seed)
 	{
+		const uint8_t *p = reinterpret_cast<uint8_t*>(data);
 		CRC_TYPE crc = seed;
 
 		while (len--)
 		{
 			if (m_ref_in)
 			{
-				crc ^= (bitop::reverse(*data++) << (WIDTH - 8));
+				crc ^= (bitop::reverse(*p++) << (WIDTH - 8));
 			}
 			else
 			{
-				crc ^= (*data++ << (WIDTH - 8));
+				crc ^= (*p++ << (WIDTH - 8));
 			}
 
 			for (auto bit = 8; bit--;)
@@ -186,25 +189,28 @@ public:
 		return m_poly;
 	}
 
-	CRC_TYPE get(uint8_t *data, uint32_t len)
+	template<typename T>
+	CRC_TYPE get(T data, uint32_t len)
 	{
-		return get(data, len, m_seed);
+		return get(reinterpret_cast<uint8_t*>(data), len, m_seed);
 	}
 
-	CRC_TYPE get(uint8_t *data, uint32_t len, const CRC_TYPE seed)
+	template<typename T>
+	CRC_TYPE get(T data, uint32_t len, const CRC_TYPE seed)
 	{
+		const uint8_t *p = reinterpret_cast<uint8_t*>(data);
 		CRC_TYPE crc = seed;
 
 		while (len--)
 		{
 			if (m_ref_in)
 			{
-				const auto d = bitop::reverse(*data++) ^ (crc >> (WIDTH - 8));
+				const auto d = bitop::reverse(*p++) ^ (crc >> (WIDTH - 8));
 				crc = m_table[d] ^ (crc << 8);
 			}
 			else
 			{
-				const auto d = (*data++) ^ (crc >> (WIDTH - 8));
+				const auto d = (*p++) ^ (crc >> (WIDTH - 8));
 				crc = m_table[d] ^ (crc << 8);
 			}
 		}
