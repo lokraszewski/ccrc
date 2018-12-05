@@ -9,8 +9,6 @@
 #include <array>
 #include <chrono>
 #include <cxxopts.hpp>
-#include <fmt/format.h>
-#include <fmt/ostream.h>
 #include <fstream>
 #include <iostream>
 #include <map>
