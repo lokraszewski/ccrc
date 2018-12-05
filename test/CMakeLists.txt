@@ -1,4 +1,4 @@
-
+find_package(catch2)
 
 
 add_executable(${PROJECT_NAME}_test

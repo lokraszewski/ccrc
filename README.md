@@ -41,5 +41,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * [sunshine2k](http://www.sunshine2k.de/coding/javascript/crc/crc_js.html) - Online CRC calculator used to confirm checksums with all the neccearry pre-defined checksums.
+* [jarro2783 - cxxopts](https://github.com/jarro2783/cxxopts) - awesome command line parser in C++. 
 
 See also the list of [contributors](https://github.com/lokraszewski/cpp-crc/contributors) who participated in this project.
