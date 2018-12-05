@@ -5,8 +5,6 @@ project(crc
   LANGUAGES CXX
   )
 
-include(cmake/conan.cmake)
-
 if (NOT CMAKE_BUILD_TYPE)
     message(STATUS "No build type selected, defaulting to Debug")
     set(CMAKE_BUILD_TYPE "Debug")
@@ -15,24 +13,17 @@ endif()
 option(TESTS_ENABLED "Enable automatic tests" OFF)
 option(BENCHMARK_ENABLED "Enable automatic benchmark" OFF)
 
+
+
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options("-Wall" "-Wextra" "-Werror" "$<$<CONFIG:RELEASE>:-O3>")
 
-
-conan_cmake_run(
-  REQUIRES
-    catch2/2.4.1@bincrafters/stable
-  BASIC_SETUP
-  CMAKE_TARGETS
-  BUILD
-    catch2
-)
-set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
-message(${CMAKE_BINARY_DIR})
+find_package(catch2)
 
 add_subdirectory(${PROJECT_NAME})
 add_subdirectory(test)
-# add_subdirectory(example)

@@ -41,6 +41,9 @@ const static std::string l_lorem_psum =
     "lectus pede mi. Magna mus. Pellentesque suscipit, in amet libero consectetuer, tincidunt laboriosam, hymenaeos class mi in luctus "
     "dolor platea, tincidunt porta inceptos nibh sapien leo auctor.";
 
+const static uint8_t l_byte_raw_array_small[] = {0xDE, 0xAD, 0xBE, 0xEF};
+const static uint8_t l_byte_raw_array_large[] = {0xDE, 0xAD, 0xBE, 0xEF};
+
 TEST_CASE("bitop::reverse works correctly. ", "[bitop]")
 {
 
