@@ -14,10 +14,38 @@
 #include "crc/crc.h"
 
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
+#include <catch2/catch.hpp>
 
-#include "catch.hpp"
+const static std::string l_lorem_psum =
+    "Lorem ipsum dolor sit amet, condimentum id, quia ut enim. Congue lacus justo et egestas lacus purus, nam molestie et dictumst praesent, porta placerat sodales magnis mi rerum, per justo pede orci in vitae, mauris in. Elit aliquet ac et sit suspendisse tortor, malesuada arcu imperdiet varius est maecenas nunc, aliquam leo, ac diam. Interdum volutpat morbi non libero, venenatis porttitor, eget metus orci mauris velit, eros torquent sem libero amet aliquam. Laoreet nec, sed etiam suspendisse lorem habitasse suspendisse, purus ultrices risus, consequat justo justo risus massa mauris. Neque in elit sed sed vestibulum sit, sodales dui, curabitur orci, accumsan est, fames deserunt vestibulum libero urna.
+    Sit praesent donec           amet,
+                         lacinia mauris neque vitae integer donec tincidunt, lectus in turpis erat, quam et mauris ligula,
+                         amet sit eros venenatis.Tempus erat voluptatum parturient elit, ac condimentum fringilla natoque arcu,
+                         ad faucibus donec praesent mattis, commodo mi arcu magna id nisl vitae,
+                         sit potenti velit sit enim.Velit aliquam nunc sit nihil condimentum,
+                         ullamcorper mattis mauris tincidunt dictum ac mollis, taciti arcu suscipit fusce pellentesque tristique vel,
+                         convallis at sed dictumst gravida.Est convallis et sem cum.Felis duis sapien morbi scelerisque placerat,
+                         ad vel vitae deleniti sit.Sed sollicitudin, condimentum dui,
+                         eros suscipit bibendum ac eget.Donec conubia quis donec blandit laoreet, per tellus volutpat cras consectetuer,
+                         urna id eu feugiat sodales interdum tincidunt, ut suspendisse cursus.Sodales sint erat cras,
+                         purus ipsum sem bibendum tristique pretium nulla, arcu porttitor.Maecenas vestibulum sit, aliquam dolor,
+                         erat purus elit vestibulum sed.Elit non duis.Diam leo sit dolorem.Eros in diam ut id diam,
+                         laoreet fringilla ante sit ut quis.Lacus mauris in donec sed.Enim neque nulla nec.Proin
+                             auctor est ullamcorper integer mauris quis,
+                         at erat lorem vitae fusce dignissim tempor, morbi odio velit eros ante.Lectus mus bibendum consequat,
+                         eros tincidunt, turpis rutrum non leo vitae quis, eu vestibulum accumsan,
+                         id dictumst.A vitae integer consequat eu non, accumsan velit pede in quis,
+                         quis velit fusce faucibus pharetra sem nec,
+                         non nibh ut in.Lacinia turpis sapien ante vitae convallis.Eu est felis cras eleifend a et,
+                         vestibulum sem et suspendisse vel, aliquam ac magna mauris malesuada praesent pellentesque, ligula est mus,
+                         tortor dictumst fermentum velit risus sodales.Nulla elit massa eleifend, eleifend vel aspernatur aenean,
+                         pede tellus dui.Integer quis velit ac, nibh leo tempor.Sodales non morbi in praesent, ipsum suspendisse mattis,
+                         bibendum consequat magna diam morbi, iaculis magna donec non tellus sed magna,
+                         massa sed vulputate posuere.In sagittis eu id lectus pede mi.Magna mus.Pellentesque suscipit,
+                         in amet libero consectetuer, tincidunt laboriosam, hymenaeos class mi in luctus dolor platea,
+                         tincidunt porta inceptos nibh sapien leo auctor.";
 
-TEST_CASE("bitop::reverse works correctly. ", "[bitop]")
+                         TEST_CASE("bitop::reverse works correctly. ", "[bitop]")
 {
 
   SECTION("8 bit")
@@ -156,118 +184,116 @@ TEST_CASE("SLOW CRC16 CHECKSUMS ON SMALL DATA ARE COMPUTED CORRECTLY", "[crc16-s
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x4097);
     REQUIRE(l_c16.checksum() == 0x4097);
   }
-#if 0
   SECTION("CRC-16/ARC         ")
   {
-    crc_basic<uint16_t> l_c16(0x8005, 0x0000, 0x0000, true, true);
+    crc_basic<uint16_t, 0x8005, 0x0000, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xE59B);
   }
   SECTION("CRC-16/AUG-CCITT   ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0x1D0F, 0x0000, false, false);
+    crc_basic<uint16_t, 0x1021, 0x1D0F, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xCA47);
   }
   SECTION("CRC-16/BUYPASS     ")
   {
-    crc_basic<uint16_t> l_c16(0x8005, 0x0000, 0x0000, false, false);
+    crc_basic<uint16_t, 0x8005, 0x0000, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x962B);
   }
   SECTION("CRC-16/CDMA2000    ")
   {
-    crc_basic<uint16_t> l_c16(0xC867, 0xFFFF, 0x0000, false, false);
+    crc_basic<uint16_t, 0xC867, 0xFFFF, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xAEB8);
   }
   SECTION("CRC-16/DDS-110     ")
   {
-    crc_basic<uint16_t> l_c16(0x8005, 0x800D, 0x0000, false, false);
+    crc_basic<uint16_t, 0x8005, 0x800D, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x96F3);
   }
   SECTION("CRC-16/DECT-R      ")
   {
-    crc_basic<uint16_t> l_c16(0x0589, 0x0000, 0x0001, false, false);
+    crc_basic<uint16_t, 0x0589, 0x0000, 0x0001, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x303B);
   }
   SECTION("CRC-16/DECT-X      ")
   {
-    crc_basic<uint16_t> l_c16(0x0589, 0x0000, 0x0000, false, false);
+    crc_basic<uint16_t, 0x0589, 0x0000, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x303A);
   }
   SECTION("CRC-16/DNP         ")
   {
-    crc_basic<uint16_t> l_c16(0x3D65, 0x0000, 0xFFFF, true, true);
+    crc_basic<uint16_t, 0x3D65, 0x0000, 0xFFFF, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x60B8);
   }
   SECTION("CRC-16/EN-13757    ")
   {
-    crc_basic<uint16_t> l_c16(0x3D65, 0x0000, 0xFFFF, false, false);
+    crc_basic<uint16_t, 0x3D65, 0x0000, 0xFFFF, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x27E4);
   }
   SECTION("CRC-16/GENIBUS     ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0xFFFF, 0xFFFF, false, false);
+    crc_basic<uint16_t, 0x1021, 0xFFFF, 0xFFFF, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xBF68);
   }
   SECTION("CRC-16/MAXIM       ")
   {
-    crc_basic<uint16_t> l_c16(0x8005, 0x0000, 0xFFFF, true, true);
+    crc_basic<uint16_t, 0x8005, 0x0000, 0xFFFF, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x1A64);
   }
   SECTION("CRC-16/MCRF4XX     ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0xFFFF, 0x0000, true, true);
+    crc_basic<uint16_t, 0x1021, 0xFFFF, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x1A34);
   }
   SECTION("CRC-16/RIELLO      ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0xB2AA, 0x0000, true, true);
+    crc_basic<uint16_t, 0x1021, 0xB2AA, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x3E73);
   }
   SECTION("CRC-16/T10-DIF     ")
   {
-    crc_basic<uint16_t> l_c16(0x8BB7, 0x0000, 0x0000, false, false);
+    crc_basic<uint16_t, 0x8BB7, 0x0000, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x34DC);
   }
   SECTION("CRC-16/TELEDISK    ")
   {
-    crc_basic<uint16_t> l_c16(0xA097, 0x0000, 0x0000, false, false);
+    crc_basic<uint16_t, 0xA097, 0x0000, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x520D);
   }
   SECTION("CRC-16/TMS37157    ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0x89EC, 0x0000, true, true);
+    crc_basic<uint16_t, 0x1021, 0x89EC, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xE1CA);
   }
   SECTION("CRC-16/USB         ")
   {
-    crc_basic<uint16_t> l_c16(0x8005, 0xFFFF, 0xFFFF, true, true);
+    crc_basic<uint16_t, 0x8005, 0xFFFF, 0xFFFF, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x3E64);
   }
   SECTION("CRC-A              ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0xC6C6, 0x0000, true, true);
+    crc_basic<uint16_t, 0x1021, 0xC6C6, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x4F15);
   }
   SECTION("CRC-16/KERMIT      ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0x0000, 0x0000, true, true);
+    crc_basic<uint16_t, 0x1021, 0x0000, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0x1915);
   }
   SECTION("CRC-16/MODBUS      ")
   {
-    crc_basic<uint16_t> l_c16(0x8005, 0xFFFF, 0x0000, true, true);
+    crc_basic<uint16_t, 0x8005, 0xFFFF, 0x0000, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xC19B);
   }
   SECTION("CRC-16/X-25        ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0xFFFF, 0xFFFF, true, true);
+    crc_basic<uint16_t, 0x1021, 0xFFFF, 0xFFFF, true, true> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xE5CB);
   }
   SECTION("CRC-16/XMODEM      ")
   {
-    crc_basic<uint16_t> l_c16(0x1021, 0x0000, 0x0000, false, false);
+    crc_basic<uint16_t, 0x1021, 0x0000, 0x0000, false, false> l_c16;
     REQUIRE(l_c16.process_bytes(data, sizeof(data)) == 0xC457);
   }
-#endif
 }
 
 #if 0
