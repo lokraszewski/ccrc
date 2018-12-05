@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.9)
 
+include(ExternalProject)
+
 project(crc
   VERSION 1.0.0
   LANGUAGES CXX
@@ -10,8 +12,8 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
-option(TESTS_ENABLED "Enable automatic tests" OFF)
-option(BENCHMARK_ENABLED "Enable automatic benchmark" OFF)
+option(BUILD_TEST "Enable building tests" OFF)
+# option(BUILD_BENCHMARK "Enable automatic benchmark" OFF)
 
 
 
@@ -31,4 +33,11 @@ add_definitions(
 find_package(catch2)
 
 add_subdirectory(${PROJECT_NAME})
+
+if(BUILD_TEST)
 add_subdirectory(test)
+endif(BUILD_TEST)
+
+# if(BUILD_BENCHMARK)
+# add_subdirectory(benchmark)
+# endif(BUILD_BENCHMARK)

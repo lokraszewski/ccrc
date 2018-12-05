@@ -6,8 +6,10 @@ A simple header only CRC class. Currently only supports a naive algorithm (slow)
 
 ### Prerequisites
 * [cmake](https://cmake.org/)
-* [conan](https://conan.io/) - For Catch2
-* [Google Benchmark](https://github.com/google/benchmark)
+* [conan](https://conan.io/) - For Catch2 unit tests.
+
+### Remotes
+* `conan remote add conan-mpusz https://api.bintray.com/conan/mpusz/conan-mpusz
 
 ## Build
 ```

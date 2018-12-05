@@ -59,6 +59,7 @@ matrix:
 before_install:
     - eval "${MATRIX_EVAL}"
     - sudo pip install conan
+    - conan remote add conan-mpusz https://api.bintray.com/conan/mpusz/conan-mpusz
     - conan user
 
 install:
@@ -66,5 +67,5 @@ install:
 script:
   - mkdir build && cd build
   - conan install ..
-  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE && make
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=ON .. && make
   - ./bin/crc_test
