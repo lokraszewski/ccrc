@@ -17,35 +17,31 @@
 #include <catch2/catch.hpp>
 
 const static std::string l_lorem_psum =
-    "Lorem ipsum dolor sit amet, condimentum id, quia ut enim. Congue lacus justo et egestas lacus purus, nam molestie et dictumst praesent, porta placerat sodales magnis mi rerum, per justo pede orci in vitae, mauris in. Elit aliquet ac et sit suspendisse tortor, malesuada arcu imperdiet varius est maecenas nunc, aliquam leo, ac diam. Interdum volutpat morbi non libero, venenatis porttitor, eget metus orci mauris velit, eros torquent sem libero amet aliquam. Laoreet nec, sed etiam suspendisse lorem habitasse suspendisse, purus ultrices risus, consequat justo justo risus massa mauris. Neque in elit sed sed vestibulum sit, sodales dui, curabitur orci, accumsan est, fames deserunt vestibulum libero urna.
-    Sit praesent donec           amet,
-                         lacinia mauris neque vitae integer donec tincidunt, lectus in turpis erat, quam et mauris ligula,
-                         amet sit eros venenatis.Tempus erat voluptatum parturient elit, ac condimentum fringilla natoque arcu,
-                         ad faucibus donec praesent mattis, commodo mi arcu magna id nisl vitae,
-                         sit potenti velit sit enim.Velit aliquam nunc sit nihil condimentum,
-                         ullamcorper mattis mauris tincidunt dictum ac mollis, taciti arcu suscipit fusce pellentesque tristique vel,
-                         convallis at sed dictumst gravida.Est convallis et sem cum.Felis duis sapien morbi scelerisque placerat,
-                         ad vel vitae deleniti sit.Sed sollicitudin, condimentum dui,
-                         eros suscipit bibendum ac eget.Donec conubia quis donec blandit laoreet, per tellus volutpat cras consectetuer,
-                         urna id eu feugiat sodales interdum tincidunt, ut suspendisse cursus.Sodales sint erat cras,
-                         purus ipsum sem bibendum tristique pretium nulla, arcu porttitor.Maecenas vestibulum sit, aliquam dolor,
-                         erat purus elit vestibulum sed.Elit non duis.Diam leo sit dolorem.Eros in diam ut id diam,
-                         laoreet fringilla ante sit ut quis.Lacus mauris in donec sed.Enim neque nulla nec.Proin
-                             auctor est ullamcorper integer mauris quis,
-                         at erat lorem vitae fusce dignissim tempor, morbi odio velit eros ante.Lectus mus bibendum consequat,
-                         eros tincidunt, turpis rutrum non leo vitae quis, eu vestibulum accumsan,
-                         id dictumst.A vitae integer consequat eu non, accumsan velit pede in quis,
-                         quis velit fusce faucibus pharetra sem nec,
-                         non nibh ut in.Lacinia turpis sapien ante vitae convallis.Eu est felis cras eleifend a et,
-                         vestibulum sem et suspendisse vel, aliquam ac magna mauris malesuada praesent pellentesque, ligula est mus,
-                         tortor dictumst fermentum velit risus sodales.Nulla elit massa eleifend, eleifend vel aspernatur aenean,
-                         pede tellus dui.Integer quis velit ac, nibh leo tempor.Sodales non morbi in praesent, ipsum suspendisse mattis,
-                         bibendum consequat magna diam morbi, iaculis magna donec non tellus sed magna,
-                         massa sed vulputate posuere.In sagittis eu id lectus pede mi.Magna mus.Pellentesque suscipit,
-                         in amet libero consectetuer, tincidunt laboriosam, hymenaeos class mi in luctus dolor platea,
-                         tincidunt porta inceptos nibh sapien leo auctor.";
+    "Lorem ipsum dolor sit amet, condimentum id, quia ut enim. Congue lacus justo et egestas lacus purus, nam molestie et dictumst "
+    "praesent, porta placerat sodales magnis mi rerum, per justo pede orci in vitae, mauris in. Elit aliquet ac et sit suspendisse tortor, "
+    "malesuada arcu imperdiet varius est maecenas nunc, aliquam leo, ac diam. Interdum volutpat morbi non libero, venenatis porttitor, "
+    "eget metus orci mauris velit, eros torquent sem libero amet aliquam. Laoreet nec, sed etiam suspendisse lorem habitasse suspendisse, "
+    "purus ultrices risus, consequat justo justo risus massa mauris. Neque in elit sed sed vestibulum sit, sodales dui, curabitur orci, "
+    "accumsan est, fames deserunt vestibulum libero urna. Sit praesent donec amet, lacinia mauris neque vitae integer donec tincidunt, "
+    "lectus in turpis erat, quam et mauris ligula, amet sit eros venenatis. Tempus erat voluptatum parturient elit, ac condimentum "
+    "fringilla natoque arcu, ad faucibus donec praesent mattis, commodo mi arcu magna id nisl vitae, sit potenti velit sit enim. Velit "
+    "aliquam nunc sit nihil condimentum, ullamcorper mattis mauris tincidunt dictum ac mollis, taciti arcu suscipit fusce pellentesque "
+    "tristique vel, convallis at sed dictumst gravida. Est convallis et sem cum. Felis duis sapien morbi scelerisque placerat, ad vel "
+    "vitae deleniti sit. Sed sollicitudin, condimentum dui, eros suscipit bibendum ac eget. Donec conubia quis donec blandit laoreet, per "
+    "tellus volutpat cras consectetuer, urna id eu feugiat sodales interdum tincidunt, ut suspendisse cursus. Sodales sint erat cras, "
+    "purus ipsum sem bibendum tristique pretium nulla, arcu porttitor.	Maecenas vestibulum sit, aliquam dolor, erat purus elit vestibulum "
+    "sed. Elit non duis. Diam leo sit dolorem. Eros in diam ut id diam, laoreet fringilla ante sit ut quis. Lacus mauris in donec sed. "
+    "Enim neque nulla nec. Proin auctor est ullamcorper integer mauris quis, at erat lorem vitae fusce dignissim tempor, morbi odio velit "
+    "eros ante. Lectus mus bibendum consequat, eros tincidunt, turpis rutrum non leo vitae quis, eu vestibulum accumsan, id dictumst. A "
+    "vitae integer consequat eu non, accumsan velit pede in quis, quis velit fusce faucibus pharetra sem nec, non nibh ut in. Lacinia "
+    "turpis sapien ante vitae convallis. Eu est felis cras eleifend a et, vestibulum sem et suspendisse vel, aliquam ac magna mauris "
+    "malesuada praesent pellentesque, ligula est mus, tortor dictumst fermentum velit risus sodales. Nulla elit massa eleifend, eleifend "
+    "vel aspernatur aenean, pede tellus dui. Integer quis velit ac, nibh leo tempor. Sodales non morbi in praesent, ipsum suspendisse "
+    "mattis, bibendum consequat magna diam morbi, iaculis magna donec non tellus sed magna, massa sed vulputate posuere. In sagittis eu id "
+    "lectus pede mi. Magna mus. Pellentesque suscipit, in amet libero consectetuer, tincidunt laboriosam, hymenaeos class mi in luctus "
+    "dolor platea, tincidunt porta inceptos nibh sapien leo auctor.";
 
-                         TEST_CASE("bitop::reverse works correctly. ", "[bitop]")
+TEST_CASE("bitop::reverse works correctly. ", "[bitop]")
 {
 
   SECTION("8 bit")
