@@ -12,30 +12,24 @@
 #include <iostream>
 #include <stdint.h>
 
-namespace crc
-{
-
-namespace slow
-{
-
-} // namespace slow
-
-namespace fast
-{
-template <typename CRC_TYPE>
-class crc
+template <typename crc_t, crc_t POLY, crc_t SEED = 0xFFFF, crc_t XOR_OUT = 0, bool REF_IN = false, bool REF_OUT = false>
+class crc_table
 {
 private:
-  constexpr std::array<CRC_TYPE, 0x100> init_table(void)
+  static constexpr auto                          TABLE_SIZE = 0x100;
+  static constexpr std::array<crc_t, TABLE_SIZE> init_table(const crc_t poly)
   {
-    std::array<CRC_TYPE, 0x100> r;
+    std::array<crc_t, TABLE_SIZE> r;
+    constexpr auto                width        = 8 * sizeof(crc_t);
+    constexpr auto                top_bit      = (1 << (width - 1));
+    constexpr auto                shift_places = width - 8;
 
-    for (auto d = 0; d < 0x100; ++d)
+    for (auto d = 0; d < TABLE_SIZE; ++d)
     {
       /*
        * Start with the dividend followed by zeros.
        */
-      CRC_TYPE rem = d << (WIDTH - 8);
+      crc_t rem = d << shift_places;
 
       /*
        * Perform modulo-2 division, a bit at a time.
@@ -45,9 +39,9 @@ private:
         /*
          * Try to divide the current data bit.
          */
-        if (rem & TOP_BIT)
+        if (rem & top_bit)
         {
-          rem = (rem << 1) ^ m_poly;
+          rem = (rem << 1) ^ poly;
         }
         else
         {
@@ -65,64 +59,71 @@ private:
   }
 
 protected:
-  const CRC_TYPE m_poly;
-  const CRC_TYPE m_seed;
-  const CRC_TYPE m_xor;
-
-  const bool m_ref_in;
-  const bool m_ref_out;
-
-  static constexpr size_t   WIDTH   = 8 * sizeof(CRC_TYPE);
-  static constexpr CRC_TYPE TOP_BIT = (1 << (WIDTH - 1));
-
-  const std::array<CRC_TYPE, 0x100> m_table;
+  crc_t                               m_checksum = SEED;
+  static constexpr size_t             WIDTH      = 8 * sizeof(crc_t);
+  static constexpr crc_t              TOP_BIT    = (1 << (WIDTH - 1));
+  const std::array<crc_t, TABLE_SIZE> m_table    = init_table(POLY);
+  // const crc_t[TABLE_SIZE] m_table;
 
 public:
-  crc(const CRC_TYPE poly, const CRC_TYPE seed = 0, const CRC_TYPE XorOut = 0, const bool RefIn = false, const bool RefOut = false)
-      : m_poly(poly), m_seed(seed), m_xor(XorOut), m_ref_in(RefIn), m_ref_out(RefOut), m_table(init_table())
+  crc_table()                   = default;
+  crc_table(const crc_table &)  = delete; // Disable copy constructor
+  crc_table(const crc_table &&) = delete; // Disable move constructor
+
+  const crc_t get_seed() const { return SEED; }
+  const crc_t get_poly() const { return POLY; }
+  void        reset(const crc_t new_seed) { m_checksum = new_seed; }
+  void        reset() { m_checksum = SEED; }
+
+  const crc_t checksum() const noexcept
   {
-  }
-
-  const CRC_TYPE get_seed() const { return m_seed; }
-
-  const CRC_TYPE get_poly() const { return m_poly; }
-
-  template <typename T>
-  CRC_TYPE get(T data, uint32_t len)
-  {
-    return get(reinterpret_cast<uint8_t *>(data), len, m_seed);
-  }
-
-  template <typename T>
-  CRC_TYPE get(T data, uint32_t len, const CRC_TYPE seed)
-  {
-    const uint8_t *p   = reinterpret_cast<uint8_t *>(data);
-    CRC_TYPE       crc = seed;
-
-    while (len--)
+    if constexpr (REF_OUT)
     {
-      if (m_ref_in)
-      {
-        const auto d = bitop::reverse(*p++) ^ (crc >> (WIDTH - 8));
-        crc          = m_table[d] ^ (crc << 8);
-      }
-      else
-      {
-        const auto d = (*p++) ^ (crc >> (WIDTH - 8));
-        crc          = m_table[d] ^ (crc << 8);
-      }
-    }
-
-    if (m_ref_out)
-    {
-      return (bitop::reverse(crc)) ^ m_xor;
+      return (bitop::reverse(m_checksum)) ^ XOR_OUT;
     }
     else
     {
-      return crc ^ m_xor;
+      return m_checksum ^ XOR_OUT;
     }
   }
-};
-} // namespace fast
 
-} // namespace crc
+  crc_t process_byte(unsigned char byte)
+  {
+    if constexpr (REF_IN)
+    {
+      const auto d = bitop::reverse(byte) ^ (m_checksum >> (WIDTH - 8));
+      m_checksum   = m_table[d] ^ (m_checksum << 8);
+    }
+    else
+    {
+      const auto d = (byte) ^ (m_checksum >> (WIDTH - 8));
+      m_checksum   = m_table[d] ^ (m_checksum << 8);
+    }
+
+    return checksum();
+  }
+
+  crc_t process_block(void const *bytes_begin, void const *bytes_end)
+  {
+    const uint8_t *p_begin = reinterpret_cast<const uint8_t *>(bytes_begin);
+    const uint8_t *p_end   = reinterpret_cast<const uint8_t *>(bytes_end);
+
+    while (p_begin != p_end)
+    {
+      (void)process_byte(*p_begin++);
+    }
+    return checksum();
+  }
+
+  crc_t process_bytes(void const *buffer, const std::size_t byte_count)
+  {
+    const uint8_t *p = reinterpret_cast<const uint8_t *>(buffer);
+
+    for (auto bytes = byte_count; bytes--;)
+    {
+      (void)process_byte(*p++);
+    }
+
+    return checksum();
+  }
+};

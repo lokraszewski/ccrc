@@ -93,14 +93,4 @@ public:
     return checksum();
   }
 
-  // template <typename T>
-  // crc_t get(T data, uint32_t len)
-  // {
-  //   return get(reinterpret_cast<uint8_t *>(data), len, m_seed);
-  // }
-
-  // template <typename T>
-  // crc_t get(T data, uint32_t len, const crc_t seed)
-  // {
-  // }
 };

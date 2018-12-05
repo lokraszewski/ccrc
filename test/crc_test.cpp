@@ -192,7 +192,7 @@ TEST_CASE("Reseting works", "")
   REQUIRE(l_c16.checksum() == 0xAABB);
 }
 
-TEST_CASE("Small data sets using basic computation", "[small]")
+TEST_CASE("Small data sets using basic computation", "[small-basic]")
 {
   using namespace crc::basic;
   SECTION("CRC_32")
@@ -408,9 +408,440 @@ TEST_CASE("Small data sets using basic computation", "[small]")
   }
 }
 
-TEST_CASE("String data sets using basic computation", "[string]")
+TEST_CASE("String data sets using basic computation", "[string-basic]")
 {
   using namespace crc::basic;
+  SECTION("CRC_32")
+  {
+    default32_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32"]);
+  }
+  SECTION("CRC_32_BZIP2")
+  {
+    bzip2_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32_BZIP2"]);
+  }
+  SECTION("CRC_32C")
+  {
+    crc32c_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32C"]);
+  }
+  SECTION("CRC_32D")
+  {
+    crc32d_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32D"]);
+  }
+  SECTION("CRC_32_MPEG_2")
+  {
+    mpeg2_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32_MPEG_2"]);
+  }
+  SECTION("CRC_32_POSIX")
+  {
+    posix_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32_POSIX"]);
+  }
+  SECTION("CRC_32Q")
+  {
+    crc32q_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32Q"]);
+  }
+  SECTION("CRC_32_JAMCRC")
+  {
+    jamcrc_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32_JAMCRC"]);
+  }
+  SECTION("CRC_32_XFER")
+  {
+    xfer_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_32_XFER"]);
+  }
+  SECTION("CRC_16_CCITT_FALSE")
+  {
+    ccitt_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_CCITT_FALSE"]);
+  }
+  SECTION("CRC_16_ARC")
+  {
+    arc_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_ARC"]);
+  }
+  SECTION("CRC_16_AUG_CCITT")
+  {
+    aug_ccitt_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_AUG_CCITT"]);
+  }
+  SECTION("CRC_16_BUYPASS")
+  {
+    buypass_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_BUYPASS"]);
+  }
+  SECTION("CRC_16_CDMA2000")
+  {
+    cdma2000_16_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_CDMA2000"]);
+  }
+  SECTION("CRC_16_DDS_110")
+  {
+    dds_110_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_DDS_110"]);
+  }
+  SECTION("CRC_16_DECT_R")
+  {
+    dect_r_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_DECT_R"]);
+  }
+  SECTION("CRC_16_DECT_X")
+  {
+    dect_x_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_DECT_X"]);
+  }
+  SECTION("CRC_16_DNP")
+  {
+    dnp_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_DNP"]);
+  }
+  SECTION("CRC_16_EN_13757")
+  {
+    en_13757_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_EN_13757"]);
+  }
+  SECTION("CRC_16_GENIBUS")
+  {
+    genibus_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_GENIBUS"]);
+  }
+  SECTION("CRC_16_MAXIM")
+  {
+    maxim16_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_MAXIM"]);
+  }
+  SECTION("CRC_16_MCRF4XX")
+  {
+    mcrf4xx_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_MCRF4XX"]);
+  }
+  SECTION("CRC_16_RIELLO")
+  {
+    riello_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_RIELLO"]);
+  }
+  SECTION("CRC_16_T10_DIF")
+  {
+    t10_dif_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_T10_DIF"]);
+  }
+  SECTION("CRC_16_TELEDISK")
+  {
+    teledisk_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_TELEDISK"]);
+  }
+  SECTION("CRC_16_TMS37157")
+  {
+    tms37157_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_TMS37157"]);
+  }
+  SECTION("CRC_16_USB")
+  {
+    usb_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_USB"]);
+  }
+  SECTION("CRC_A")
+  {
+    crc16a_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_A"]);
+  }
+  SECTION("CRC_16_KERMIT")
+  {
+    kermit_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_KERMIT"]);
+  }
+  SECTION("CRC_16_MODBUS")
+  {
+    modbus_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_MODBUS"]);
+  }
+  SECTION("CRC_16_X_25")
+  {
+    x_25_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_X_25"]);
+  }
+  SECTION("CRC_16_XMODEM")
+  {
+    xmodem_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_16_XMODEM"]);
+  }
+  SECTION("CRC_8")
+  {
+    default8_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8"]);
+  }
+  SECTION("CRC_8_CDMA2000")
+  {
+    cdma2000_8_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_CDMA2000"]);
+  }
+  SECTION("CRC_8_DARC")
+  {
+    darc_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_DARC"]);
+  }
+  SECTION("CRC_8_DVB_S2")
+  {
+    dvb_s2_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_DVB_S2"]);
+  }
+  SECTION("CRC_8_EBU")
+  {
+    ebu_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_EBU"]);
+  }
+  SECTION("CRC_8_I_CODE")
+  {
+    i_code_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_I_CODE"]);
+  }
+  SECTION("CRC_8_ITU")
+  {
+    itu_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_ITU"]);
+  }
+  SECTION("CRC_8_MAXIM")
+  {
+    maxim8_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_MAXIM"]);
+  }
+  SECTION("CRC_8_ROHC")
+  {
+    rohc_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_ROHC"]);
+  }
+  SECTION("CRC_8_WCDMA")
+  {
+    wcdma_t crc;
+    REQUIRE(crc.process_bytes(l_lorem_psum.c_str(), l_lorem_psum.size()) == l_map_string["CRC_8_WCDMA"]);
+  }
+}
+
+TEST_CASE("Small data sets using fast computation", "[small-fast]")
+{
+  using namespace crc::fast;
+  SECTION("CRC_32")
+  {
+
+    default32_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32"]);
+  }
+  SECTION("CRC_32_BZIP2")
+  {
+    bzip2_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32_BZIP2"]);
+  }
+  SECTION("CRC_32C")
+  {
+    crc32c_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32C"]);
+  }
+  SECTION("CRC_32D")
+  {
+    crc32d_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32D"]);
+  }
+  SECTION("CRC_32_MPEG_2")
+  {
+    mpeg2_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32_MPEG_2"]);
+  }
+  SECTION("CRC_32_POSIX")
+  {
+    posix_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32_POSIX"]);
+  }
+  SECTION("CRC_32Q")
+  {
+    crc32q_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32Q"]);
+  }
+  SECTION("CRC_32_JAMCRC")
+  {
+    jamcrc_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32_JAMCRC"]);
+  }
+  SECTION("CRC_32_XFER")
+  {
+    xfer_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_32_XFER"]);
+  }
+  SECTION("CRC_16_CCITT_FALSE")
+  {
+    ccitt_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_CCITT_FALSE"]);
+  }
+  SECTION("CRC_16_ARC")
+  {
+    arc_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_ARC"]);
+  }
+  SECTION("CRC_16_AUG_CCITT")
+  {
+    aug_ccitt_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_AUG_CCITT"]);
+  }
+  SECTION("CRC_16_BUYPASS")
+  {
+    buypass_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_BUYPASS"]);
+  }
+  SECTION("CRC_16_CDMA2000")
+  {
+    cdma2000_16_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_CDMA2000"]);
+  }
+  SECTION("CRC_16_DDS_110")
+  {
+    dds_110_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_DDS_110"]);
+  }
+  SECTION("CRC_16_DECT_R")
+  {
+    dect_r_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_DECT_R"]);
+  }
+  SECTION("CRC_16_DECT_X")
+  {
+    dect_x_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_DECT_X"]);
+  }
+  SECTION("CRC_16_DNP")
+  {
+    dnp_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_DNP"]);
+  }
+  SECTION("CRC_16_EN_13757")
+  {
+    en_13757_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_EN_13757"]);
+  }
+  SECTION("CRC_16_GENIBUS")
+  {
+    genibus_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_GENIBUS"]);
+  }
+  SECTION("CRC_16_MAXIM")
+  {
+    maxim16_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_MAXIM"]);
+  }
+  SECTION("CRC_16_MCRF4XX")
+  {
+    mcrf4xx_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_MCRF4XX"]);
+  }
+  SECTION("CRC_16_RIELLO")
+  {
+    riello_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_RIELLO"]);
+  }
+  SECTION("CRC_16_T10_DIF")
+  {
+    t10_dif_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_T10_DIF"]);
+  }
+  SECTION("CRC_16_TELEDISK")
+  {
+    teledisk_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_TELEDISK"]);
+  }
+  SECTION("CRC_16_TMS37157")
+  {
+    tms37157_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_TMS37157"]);
+  }
+  SECTION("CRC_16_USB")
+  {
+    usb_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_USB"]);
+  }
+  SECTION("CRC_A")
+  {
+    crc16a_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_A"]);
+  }
+  SECTION("CRC_16_KERMIT")
+  {
+    kermit_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_KERMIT"]);
+  }
+  SECTION("CRC_16_MODBUS")
+  {
+    modbus_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_MODBUS"]);
+  }
+  SECTION("CRC_16_X_25")
+  {
+    x_25_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_X_25"]);
+  }
+  SECTION("CRC_16_XMODEM")
+  {
+    xmodem_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_16_XMODEM"]);
+  }
+  SECTION("CRC_8")
+  {
+    default8_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8"]);
+  }
+  SECTION("CRC_8_CDMA2000")
+  {
+    cdma2000_8_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_CDMA2000"]);
+  }
+  SECTION("CRC_8_DARC")
+  {
+    darc_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_DARC"]);
+  }
+  SECTION("CRC_8_DVB_S2")
+  {
+    dvb_s2_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_DVB_S2"]);
+  }
+  SECTION("CRC_8_EBU")
+  {
+    ebu_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_EBU"]);
+  }
+  SECTION("CRC_8_I_CODE")
+  {
+    i_code_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_I_CODE"]);
+  }
+  SECTION("CRC_8_ITU")
+  {
+    itu_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_ITU"]);
+  }
+  SECTION("CRC_8_MAXIM")
+  {
+    maxim8_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_MAXIM"]);
+  }
+  SECTION("CRC_8_ROHC")
+  {
+    rohc_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_ROHC"]);
+  }
+  SECTION("CRC_8_WCDMA")
+  {
+    wcdma_t crc;
+    REQUIRE(crc.process_bytes(l_byte_raw_array_4, 4) == l_map_4["CRC_8_WCDMA"]);
+  }
+}
+
+TEST_CASE("String data sets using fast computation", "[string-fast]")
+{
+  using namespace crc::fast;
   SECTION("CRC_32")
   {
     default32_t crc;
