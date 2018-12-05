@@ -23,6 +23,11 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options("-Wall" "-Wextra" "-Werror" "$<$<CONFIG:RELEASE>:-O3>")
 
+# Workaround for Catch2 not working with clang.
+add_definitions(
+  -DCATCH_CONFIG_NO_CPP17_UNCAUGHT_EXCEPTIONS
+)
+
 find_package(catch2)
 
 add_subdirectory(${PROJECT_NAME})
