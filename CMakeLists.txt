@@ -13,6 +13,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 option(BUILD_TEST "Enable building tests" OFF)
+option(BUILD_EXAMPLE "Enable building example app." OFF)
 # option(BUILD_BENCHMARK "Enable automatic benchmark" OFF)
 
 
@@ -30,14 +31,12 @@ add_definitions(
   -DCATCH_CONFIG_NO_CPP17_UNCAUGHT_EXCEPTIONS
 )
 
-find_package(catch2)
-
 add_subdirectory(${PROJECT_NAME})
 
 if(BUILD_TEST)
 add_subdirectory(test)
 endif(BUILD_TEST)
 
-# if(BUILD_BENCHMARK)
-# add_subdirectory(benchmark)
-# endif(BUILD_BENCHMARK)
+if(BUILD_EXAMPLE)
+add_subdirectory(example)
+endif(BUILD_EXAMPLE)

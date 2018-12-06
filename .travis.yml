@@ -66,6 +66,7 @@ install:
 
 script:
   - mkdir build && cd build
-  - conan install ..
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TEST=ON .. && make
+  - conan install .. --build
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TEST=ON -DBUILD_EXAMPLE=ON .. && make
   - ./bin/crc_test
+  - ./bin/crc_example -i "Hello world!"
