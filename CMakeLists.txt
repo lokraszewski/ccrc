@@ -1,43 +1,42 @@
-cmake_minimum_required(VERSION 2.8.9)
-set(CMAKE_C_COMPILER "clang")
-set(CMAKE_CXX_COMPILER "clang++")
+cmake_minimum_required(VERSION 3.9)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+include(ExternalProject)
 
-SET (CMAKE_C_FLAGS_INIT                "-Wall -std=c99")
-SET (CMAKE_C_FLAGS_DEBUG_INIT          "-g")
-SET (CMAKE_C_FLAGS_MINSIZEREL_INIT     "-Os -DNDEBUG")
-SET (CMAKE_C_FLAGS_RELEASE_INIT        "-O4 -DNDEBUG")
-SET (CMAKE_C_FLAGS_RELWITHDEBINFO_INIT "-O2 -g")
+project(crc
+  VERSION 1.1.0
+  LANGUAGES CXX
+  )
 
-SET (CMAKE_CXX_FLAGS_INIT                "-Wall")
-SET (CMAKE_CXX_FLAGS_DEBUG_INIT          "-g")
-SET (CMAKE_CXX_FLAGS_MINSIZEREL_INIT     "-Os -DNDEBUG")
-SET (CMAKE_CXX_FLAGS_RELEASE_INIT        "-O4 -DNDEBUG")
-SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "-O2 -g")
+if (NOT CMAKE_BUILD_TYPE)
+    message(STATUS "No build type selected, defaulting to Debug")
+    set(CMAKE_BUILD_TYPE "Debug")
+endif()
+
+option(BUILD_TEST "Enable building tests" OFF)
+option(BUILD_EXAMPLE "Enable building example app." OFF)
+# option(BUILD_BENCHMARK "Enable automatic benchmark" OFF)
 
 
 
-project (cpp-crc)
+set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
+set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_compile_options("-Wall" "-Wextra" "-Werror" "$<$<CONFIG:RELEASE>:-O3>")
 
-# find_package(benchmark REQUIRED)
-find_package (Threads REQUIRED)
-
-set(EXECUTABLE_OUTPUT_PATH "bin")
-
-include_directories ("${PROJECT_SOURCE_DIR}/src")
-include_directories ("${PROJECT_SOURCE_DIR}/catch")
-
-set(SOURCE
-   ${SOURCE}
+# Workaround for Catch2 not working with clang.
+add_definitions(
+  -DCATCH_CONFIG_NO_CPP17_UNCAUGHT_EXCEPTIONS
 )
 
+add_subdirectory(${PROJECT_NAME})
 
-add_executable (unit_tests ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests/unit.cpp)
+if(BUILD_TEST)
+add_subdirectory(test)
+endif(BUILD_TEST)
 
-# add_executable (bm ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bm.cpp)
-# target_link_libraries(bm benchmark ${CMAKE_THREAD_LIBS_INIT})
-
+if(BUILD_EXAMPLE)
+add_subdirectory(example)
+endif(BUILD_EXAMPLE)

@@ -1,8 +1,6 @@
 CMakeFiles/*
 bin/*
 build/*
+generated/*
 
-*.txt
-!CMakeLists.txt
 Makefile
-*.cmake
