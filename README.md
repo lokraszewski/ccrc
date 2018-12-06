@@ -1,6 +1,6 @@
 # cpp-crc
 
-[![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc) [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/lokraszewski/cpp-crc/tags)
+[![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc) [![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/lokraszewski/cpp-crc/tags)
 
 A simple header only CRC class. Currently only supports raw pointers.
 
