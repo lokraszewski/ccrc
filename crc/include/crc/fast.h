@@ -2,12 +2,13 @@
  * @Author: Lukasz
  * @Date:   05-12-2018
  * @Last Modified by:   Lukasz
- * @Last Modified time: 05-12-2018
+ * @Last Modified time: 06-12-2018
  */
 
 #pragma once
 
 #include "bitop.h"
+#include "table.h"
 #include <array>
 #include <iostream>
 #include <stdint.h>
@@ -16,54 +17,11 @@ template <typename crc_t, crc_t POLY, crc_t SEED = 0xFFFF, crc_t XOR_OUT = 0, bo
 class crc_table
 {
 private:
-  static constexpr auto                          TABLE_SIZE = 0x100;
-  static constexpr std::array<crc_t, TABLE_SIZE> init_table(const crc_t poly)
-  {
-    std::array<crc_t, TABLE_SIZE> r;
-    constexpr auto                width        = 8 * sizeof(crc_t);
-    constexpr auto                top_bit      = (1 << (width - 1));
-    constexpr auto                shift_places = width - 8;
-
-    for (auto d = 0; d < TABLE_SIZE; ++d)
-    {
-      /*
-       * Start with the dividend followed by zeros.
-       */
-      crc_t rem = d << shift_places;
-
-      /*
-       * Perform modulo-2 division, a bit at a time.
-       */
-      for (auto bit = 8; bit--;)
-      {
-        /*
-         * Try to divide the current data bit.
-         */
-        if (rem & top_bit)
-        {
-          rem = (rem << 1) ^ poly;
-        }
-        else
-        {
-          rem = (rem << 1);
-        }
-      }
-
-      /*
-       * Store the result into the table.
-       */
-      r[d] = rem;
-    }
-
-    return r;
-  }
+  const crc::LookUpTable<crc_t> m_table = crc::LookUpTable<crc_t>(POLY);
 
 protected:
-  crc_t                               m_checksum = SEED;
-  static constexpr size_t             WIDTH      = 8 * sizeof(crc_t);
-  static constexpr crc_t              TOP_BIT    = (1 << (WIDTH - 1));
-  const std::array<crc_t, TABLE_SIZE> m_table    = init_table(POLY);
-  // const crc_t[TABLE_SIZE] m_table;
+  crc_t                   m_checksum = SEED;
+  static constexpr size_t WIDTH      = 8 * sizeof(crc_t);
 
 public:
   crc_table()                   = default;
