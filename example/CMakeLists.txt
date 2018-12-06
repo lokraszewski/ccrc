@@ -1,4 +1,3 @@
-find_package(fmt)
 find_package(spdlog)
 
 add_executable(${PROJECT_NAME}_example
@@ -13,7 +12,6 @@ target_include_directories(${PROJECT_NAME}_example
 target_link_libraries(${PROJECT_NAME}_example
   ${PROJECT_NAME}
   spdlog::spdlog
-  fmt::fmt
 )
 
 set_target_properties(${PROJECT_NAME}_example
