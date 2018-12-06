@@ -17,14 +17,14 @@ namespace crc
  * @date       06-Dec-2018
  * @brief      Class for look up table.
  *
- * @tparam     T     { description }
+ * @tparam     T     Value type, uint8_t, uint16_t or uint32_t
  *
  * @details    constexpr constructable.
  */
 template <typename T>
 class LookUpTable
 {
-  static constexpr auto SIZE = 0x100;
+  static constexpr auto SIZE = 0x100; // 256 bytes, there are no undefined entries for byte input
 
 public:
   constexpr LookUpTable(const T poly) : values()
@@ -53,7 +53,6 @@ public:
   }
 
   T operator[](const uint8_t i) const { return values[i]; }
-  // T& operator[](const uint8_t i) { return values[i]; }
 
 private:
   T values[SIZE];
