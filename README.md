@@ -4,13 +4,13 @@
 
 A simple header only CRC class. Currently only supports raw pointers.
 
-## Motivation 
+## Motivation
 A standalone flexible crc solution with API similiar to that of [boost crc](https://www.boost.org/doc/libs/1_64_0/libs/crc/)
 
 
 ### Prerequisites
 * [cmake](https://cmake.org/)
-* [conan](https://conan.io/) - For Catch2 unit tests.
+* [Catch2](https://github.com/catchorg/Catch2) - for unit testing
 
 ## Build
 ```
@@ -41,7 +41,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * [sunshine2k](http://www.sunshine2k.de/coding/javascript/crc/crc_js.html) - Online CRC calculator used to confirm checksums with all the neccearry pre-defined checksums.
-* [jarro2783 - cxxopts](https://github.com/jarro2783/cxxopts) - awesome command line parser in C++. 
+* [jarro2783 - cxxopts](https://github.com/jarro2783/cxxopts) - awesome command line parser in C++.
 * [Boost crc](https://www.boost.org/doc/libs/1_64_0/libs/crc/) - great library which has inspired this project.
 
 See also the list of [contributors](https://github.com/lokraszewski/cpp-crc/contributors) who participated in this project.

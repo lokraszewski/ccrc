@@ -1,4 +1,4 @@
-find_package(spdlog)
+# find_package(spdlog)
 
 add_executable(${PROJECT_NAME}_example
   ${PROJECT_NAME}_example.cpp )
@@ -17,4 +17,5 @@ target_link_libraries(${PROJECT_NAME}_example
 set_target_properties(${PROJECT_NAME}_example
   PROPERTIES
     CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED YES
 )

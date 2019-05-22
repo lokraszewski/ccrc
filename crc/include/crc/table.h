@@ -9,8 +9,7 @@
 
 #include <stdint.h>
 
-namespace crc
-{
+namespace ccrc {
 
 /**
  * @author     lokraszewski
@@ -21,40 +20,33 @@ namespace crc
  *
  * @details    constexpr constructable.
  */
-template <typename T>
-class LookUpTable
-{
-  static constexpr auto SIZE = 0x100; // 256 bytes, there are no undefined entries for byte input
+template <typename T> class LUT {
+  /// 256 bytes, there are no undefined entries for byte input
+  static constexpr auto SIZE = 0x100;
 
 public:
-  constexpr LookUpTable(const T poly) : values()
-  {
+  constexpr LUT(const T poly) : m_values() {
 
-    constexpr auto width        = 8 * sizeof(T);
-    constexpr auto top_bit      = (1 << (width - 1));
+    constexpr auto width = 8 * sizeof(T);
+    constexpr auto top_bit = (1 << (width - 1));
     constexpr auto shift_places = width - 8;
 
-    for (auto d = 0; d < SIZE; ++d)
-    {
+    for (auto d = 0; d < SIZE; ++d) {
       T rem = d << shift_places;
-      for (auto bit = 8; bit--;)
-      {
-        if (rem & top_bit)
-        {
+      for (auto bit = 8; bit--;) {
+        if (rem & top_bit) {
           rem = (rem << 1) ^ poly;
-        }
-        else
-        {
+        } else {
           rem = (rem << 1);
         }
       }
-      values[d] = rem;
+      m_values[d] = rem;
     }
   }
 
-  T operator[](const uint8_t i) const { return values[i]; }
+  constexpr T operator[](const uint8_t i) const { return m_values[i]; }
 
 private:
-  T values[SIZE];
+  T m_values[SIZE];
 };
-} // namespace crc
+} // namespace ccrc

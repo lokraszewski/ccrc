@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <stdint.h>
+
 #include "alias.h"
 #include "basic.h"
 #include "fast.h"
