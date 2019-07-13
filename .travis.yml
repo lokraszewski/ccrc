@@ -9,7 +9,7 @@ addons:
       - ubuntu-toolchain-r-test
       - llvm-toolchain-trusty-6.0
     packages:
-      - g++-8
+      - g++-7
       - clang-6.0
       - cmake
       - libc++-dev
@@ -23,18 +23,18 @@ matrix:
     - compiler: clang
       env: BUILD_TYPE=Release
 
-    - compiler: g++
-      env: BUILD_TYPE=Debug
-
-    - compiler: g++
-      env: BUILD_TYPE=Release
-
-before_install:
-
 install:
-  # - "[ $CXX = g++ ] && export CXX=g++-8.0 || true"
-  - "[ $CXX = clang++ ] && export CXX=clang++-6.0 || true"
+  - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; fi
+
 
 script:
   - mkdir build && cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TEST=ON -DBUILD_EXAMPLE=ON .. && make
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TEST=ON -DBUILD_EXAMPLE=ON .. && make -j
+  - ./bin/bitop_test
+  - ./bin/table_test
+  - ./bin/crc_lut_test
+  - ./bin/crc_naive_test
+  - ./bin/ccrc_example -f ../example/test_data.bin
+  - ./bin/ccrc_example -i "hello world"
+
+

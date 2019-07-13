@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc) [![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/lokraszewski/cpp-crc/tags)
 
-A simple header only CRC class. Currently only supports raw pointers.
+A simple header only CRC class. Currently only supports raw pointers to uint8_t data (bytes).
 
 ## Motivation
 A standalone flexible crc solution with API similiar to that of [boost crc](https://www.boost.org/doc/libs/1_64_0/libs/crc/)
@@ -26,7 +26,7 @@ make
 Unit tests are built on [Catch2](https://github.com/catchorg/Catch2). To run:
 
 ```
-build/bin/unit_tests
+build/bin/*
 ```
 
 ## Versioning

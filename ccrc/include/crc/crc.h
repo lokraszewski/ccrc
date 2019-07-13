@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <stdint.h>
-
 #include "alias.h"
-#include "basic.h"
-#include "fast.h"
+#include "crc_lut.h"
+#include "crc_naive.h"

@@ -1,4 +1,3 @@
-# find_package(spdlog)
 
 add_executable(${PROJECT_NAME}_example
   ${PROJECT_NAME}_example.cpp )

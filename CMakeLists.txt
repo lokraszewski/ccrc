@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 
 include(ExternalProject)
 
-project(crc
+project(ccrc
   VERSION 1.2.0
   LANGUAGES CXX
   )
@@ -23,7 +23,6 @@ endif()
 
 option(BUILD_TEST "Enable building tests" OFF)
 option(BUILD_EXAMPLE "Enable building example app." OFF)
-# option(BUILD_BENCHMARK "Enable automatic benchmark" OFF)
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
