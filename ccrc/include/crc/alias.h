@@ -1,0 +1,120 @@
+/*
+ * @Author: Lukasz
+ * @Last Modified by:   Lukasz
+ * @Last Modified time: 05-12-2018
+ */
+#pragma once
+#include "crc_lut.h"
+#include "crc_naive.h"
+
+namespace ccrc {
+
+namespace naive {
+using crc32_default_t =
+    naive::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true>;
+using bzip2_t =
+    naive::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, false, false>;
+using crc32c_t =
+    naive::crc<uint32_t, 0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF, true, true>;
+using crc32d_t =
+    naive::crc<uint32_t, 0xA833982B, 0xFFFFFFFF, 0xFFFFFFFF, true, true>;
+using mpeg2_t =
+    naive::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0x00000000, false, false>;
+using posix_t =
+    naive::crc<uint32_t, 0x04C11DB7, 0x00000000, 0xFFFFFFFF, false, false>;
+using crc32q_t =
+    naive::crc<uint32_t, 0x814141AB, 0x00000000, 0x00000000, false, false>;
+using jamcrc_t =
+    naive::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0x00000000, true, true>;
+using xfer_t =
+    naive::crc<uint32_t, 0x000000AF, 0x00000000, 0x00000000, false, false>;
+using ccitt_t = naive::crc<uint16_t, 0x1021, 0xFFFF, 0x0000, false, false>;
+using arc_t = naive::crc<uint16_t, 0x8005, 0x0000, 0x0000, true, true>;
+using aug_ccitt_t = naive::crc<uint16_t, 0x1021, 0x1D0F, 0x0000, false, false>;
+using buypass_t = naive::crc<uint16_t, 0x8005, 0x0000, 0x0000, false, false>;
+using cdma2000_16_t =
+    naive::crc<uint16_t, 0xC867, 0xFFFF, 0x0000, false, false>;
+using dds_110_t = naive::crc<uint16_t, 0x8005, 0x800D, 0x0000, false, false>;
+using dect_r_t = naive::crc<uint16_t, 0x0589, 0x0000, 0x0001, false, false>;
+using dect_x_t = naive::crc<uint16_t, 0x0589, 0x0000, 0x0000, false, false>;
+using dnp_t = naive::crc<uint16_t, 0x3D65, 0x0000, 0xFFFF, true, true>;
+using en_13757_t = naive::crc<uint16_t, 0x3D65, 0x0000, 0xFFFF, false, false>;
+using genibus_t = naive::crc<uint16_t, 0x1021, 0xFFFF, 0xFFFF, false, false>;
+using maxim16_t = naive::crc<uint16_t, 0x8005, 0x0000, 0xFFFF, true, true>;
+using mcrf4xx_t = naive::crc<uint16_t, 0x1021, 0xFFFF, 0x0000, true, true>;
+using riello_t = naive::crc<uint16_t, 0x1021, 0xB2AA, 0x0000, true, true>;
+using t10_dif_t = naive::crc<uint16_t, 0x8BB7, 0x0000, 0x0000, false, false>;
+using teledisk_t = naive::crc<uint16_t, 0xA097, 0x0000, 0x0000, false, false>;
+using tms37157_t = naive::crc<uint16_t, 0x1021, 0x89EC, 0x0000, true, true>;
+using usb_t = naive::crc<uint16_t, 0x8005, 0xFFFF, 0xFFFF, true, true>;
+using crc16a_t = naive::crc<uint16_t, 0x1021, 0xC6C6, 0x0000, true, true>;
+using kermit_t = naive::crc<uint16_t, 0x1021, 0x0000, 0x0000, true, true>;
+using modbus_t = naive::crc<uint16_t, 0x8005, 0xFFFF, 0x0000, true, true>;
+using x_25_t = naive::crc<uint16_t, 0x1021, 0xFFFF, 0xFFFF, true, true>;
+using xmodem_t = naive::crc<uint16_t, 0x1021, 0x0000, 0x0000, false, false>;
+using default8_t = naive::crc<uint8_t, 0x07, 0x00, 0x00, false, false>;
+using cdma2000_8_t = naive::crc<uint8_t, 0x9B, 0xFF, 0x00, false, false>;
+using darc_t = naive::crc<uint8_t, 0x39, 0x00, 0x00, true, true>;
+using dvb_s2_t = naive::crc<uint8_t, 0xD5, 0x00, 0x00, false, false>;
+using ebu_t = naive::crc<uint8_t, 0x1D, 0xFF, 0x00, true, true>;
+using i_code_t = naive::crc<uint8_t, 0x1D, 0xFD, 0x00, false, false>;
+using itu_t = naive::crc<uint8_t, 0x07, 0x00, 0x55, false, false>;
+using maxim8_t = naive::crc<uint8_t, 0x31, 0x00, 0x00, true, true>;
+using rohc_t = naive::crc<uint8_t, 0x07, 0xFF, 0x00, true, true>;
+using wcdma_t = naive::crc<uint8_t, 0x9B, 0x00, 0x00, true, true>;
+} // namespace naive
+
+namespace lut {
+using crc32_default_t =
+    lut::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true>;
+using bzip2_t =
+    lut::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, false, false>;
+using crc32c_t =
+    lut::crc<uint32_t, 0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF, true, true>;
+using crc32d_t =
+    lut::crc<uint32_t, 0xA833982B, 0xFFFFFFFF, 0xFFFFFFFF, true, true>;
+using mpeg2_t =
+    lut::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0x00000000, false, false>;
+using posix_t =
+    lut::crc<uint32_t, 0x04C11DB7, 0x00000000, 0xFFFFFFFF, false, false>;
+using crc32q_t =
+    lut::crc<uint32_t, 0x814141AB, 0x00000000, 0x00000000, false, false>;
+using jamcrc_t =
+    lut::crc<uint32_t, 0x04C11DB7, 0xFFFFFFFF, 0x00000000, true, true>;
+using xfer_t =
+    lut::crc<uint32_t, 0x000000AF, 0x00000000, 0x00000000, false, false>;
+using ccitt_t = lut::crc<uint16_t, 0x1021, 0xFFFF, 0x0000, false, false>;
+using arc_t = lut::crc<uint16_t, 0x8005, 0x0000, 0x0000, true, true>;
+using aug_ccitt_t = lut::crc<uint16_t, 0x1021, 0x1D0F, 0x0000, false, false>;
+using buypass_t = lut::crc<uint16_t, 0x8005, 0x0000, 0x0000, false, false>;
+using cdma2000_16_t = lut::crc<uint16_t, 0xC867, 0xFFFF, 0x0000, false, false>;
+using dds_110_t = lut::crc<uint16_t, 0x8005, 0x800D, 0x0000, false, false>;
+using dect_r_t = lut::crc<uint16_t, 0x0589, 0x0000, 0x0001, false, false>;
+using dect_x_t = lut::crc<uint16_t, 0x0589, 0x0000, 0x0000, false, false>;
+using dnp_t = lut::crc<uint16_t, 0x3D65, 0x0000, 0xFFFF, true, true>;
+using en_13757_t = lut::crc<uint16_t, 0x3D65, 0x0000, 0xFFFF, false, false>;
+using genibus_t = lut::crc<uint16_t, 0x1021, 0xFFFF, 0xFFFF, false, false>;
+using maxim16_t = lut::crc<uint16_t, 0x8005, 0x0000, 0xFFFF, true, true>;
+using mcrf4xx_t = lut::crc<uint16_t, 0x1021, 0xFFFF, 0x0000, true, true>;
+using riello_t = lut::crc<uint16_t, 0x1021, 0xB2AA, 0x0000, true, true>;
+using t10_dif_t = lut::crc<uint16_t, 0x8BB7, 0x0000, 0x0000, false, false>;
+using teledisk_t = lut::crc<uint16_t, 0xA097, 0x0000, 0x0000, false, false>;
+using tms37157_t = lut::crc<uint16_t, 0x1021, 0x89EC, 0x0000, true, true>;
+using usb_t = lut::crc<uint16_t, 0x8005, 0xFFFF, 0xFFFF, true, true>;
+using crc16a_t = lut::crc<uint16_t, 0x1021, 0xC6C6, 0x0000, true, true>;
+using kermit_t = lut::crc<uint16_t, 0x1021, 0x0000, 0x0000, true, true>;
+using modbus_t = lut::crc<uint16_t, 0x8005, 0xFFFF, 0x0000, true, true>;
+using x_25_t = lut::crc<uint16_t, 0x1021, 0xFFFF, 0xFFFF, true, true>;
+using xmodem_t = lut::crc<uint16_t, 0x1021, 0x0000, 0x0000, false, false>;
+using default8_t = lut::crc<uint8_t, 0x07, 0x00, 0x00, false, false>;
+using cdma2000_8_t = lut::crc<uint8_t, 0x9B, 0xFF, 0x00, false, false>;
+using darc_t = lut::crc<uint8_t, 0x39, 0x00, 0x00, true, true>;
+using dvb_s2_t = lut::crc<uint8_t, 0xD5, 0x00, 0x00, false, false>;
+using ebu_t = lut::crc<uint8_t, 0x1D, 0xFF, 0x00, true, true>;
+using i_code_t = lut::crc<uint8_t, 0x1D, 0xFD, 0x00, false, false>;
+using itu_t = lut::crc<uint8_t, 0x07, 0x00, 0x55, false, false>;
+using maxim8_t = lut::crc<uint8_t, 0x31, 0x00, 0x00, true, true>;
+using rohc_t = lut::crc<uint8_t, 0x07, 0xFF, 0x00, true, true>;
+using wcdma_t = lut::crc<uint8_t, 0x9B, 0x00, 0x00, true, true>;
+} // namespace lut
+} // namespace ccrc
