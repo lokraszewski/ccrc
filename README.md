@@ -1,6 +1,6 @@
 # cpp-crc
 
-[![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc) [![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/lokraszewski/cpp-crc/tags)
+[![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc) [![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/lokraszewski/cpp-crc/tags)
 
 A simple header only CRC class. Currently only supports raw pointers to uint8_t data (bytes).
 
@@ -25,16 +25,11 @@ make
 ### Unit tests
 Unit tests are built on [Catch2](https://github.com/catchorg/Catch2). To run:
 
-```
-build/bin/*
-```
-
 ## Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/lokraszewski/cpp-crc/tags).
 
 ## TODOs
 * Add std containers support (iterator containers).
-
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
