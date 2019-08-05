@@ -16,7 +16,7 @@
                           // in one cpp file
 #include <catch2/catch.hpp>
 
-using namespace ccrc::naive;
+using namespace ccrc::slow;
 
 const static std::string l_lorem_psum =
     "Lorem ipsum dolor sit amet, condimentum id, quia ut enim. Congue lacus "
@@ -123,57 +123,62 @@ static std::map<std::string, unsigned long> l_map_string = {
     {"rohc_t", 0xF6},
     {"wcdma_t", 0x3A}};
 
-template <typename ptr_t, typename sz_t, typename res_lut_t>
-void test_template(ptr_t p, sz_t sz, res_lut_t &m) {
-  REQUIRE(crc32_default_t::checksum_memory(p, sz) == m["crc32_default_t"]);
-  REQUIRE(bzip2_t::checksum_memory(p, sz) == m["bzip2_t"]);
-  REQUIRE(crc32c_t::checksum_memory(p, sz) == m["crc32c_t"]);
-  REQUIRE(crc32d_t::checksum_memory(p, sz) == m["crc32d_t"]);
-  REQUIRE(mpeg2_t::checksum_memory(p, sz) == m["mpeg2_t"]);
-  REQUIRE(posix_t::checksum_memory(p, sz) == m["posix_t"]);
-  REQUIRE(crc32q_t::checksum_memory(p, sz) == m["crc32q_t"]);
-  REQUIRE(jamcrc_t::checksum_memory(p, sz) == m["jamcrc_t"]);
-  REQUIRE(xfer_t::checksum_memory(p, sz) == m["xfer_t"]);
-  REQUIRE(ccitt_t::checksum_memory(p, sz) == m["ccitt_t"]);
-  REQUIRE(arc_t::checksum_memory(p, sz) == m["arc_t"]);
-  REQUIRE(aug_ccitt_t::checksum_memory(p, sz) == m["aug_ccitt_t"]);
-  REQUIRE(buypass_t::checksum_memory(p, sz) == m["buypass_t"]);
-  REQUIRE(cdma2000_16_t::checksum_memory(p, sz) == m["cdma2000_16_t"]);
-  REQUIRE(dds_110_t::checksum_memory(p, sz) == m["dds_110_t"]);
-  REQUIRE(dect_r_t::checksum_memory(p, sz) == m["dect_r_t"]);
-  REQUIRE(dect_x_t::checksum_memory(p, sz) == m["dect_x_t"]);
-  REQUIRE(dnp_t::checksum_memory(p, sz) == m["dnp_t"]);
-  REQUIRE(en_13757_t::checksum_memory(p, sz) == m["en_13757_t"]);
-  REQUIRE(genibus_t::checksum_memory(p, sz) == m["genibus_t"]);
-  REQUIRE(maxim16_t::checksum_memory(p, sz) == m["maxim16_t"]);
-  REQUIRE(mcrf4xx_t::checksum_memory(p, sz) == m["mcrf4xx_t"]);
-  REQUIRE(riello_t::checksum_memory(p, sz) == m["riello_t"]);
-  REQUIRE(t10_dif_t::checksum_memory(p, sz) == m["t10_dif_t"]);
-  REQUIRE(teledisk_t::checksum_memory(p, sz) == m["teledisk_t"]);
-  REQUIRE(tms37157_t::checksum_memory(p, sz) == m["tms37157_t"]);
-  REQUIRE(usb_t::checksum_memory(p, sz) == m["usb_t"]);
-  REQUIRE(crc16a_t::checksum_memory(p, sz) == m["crc16a_t"]);
-  REQUIRE(kermit_t::checksum_memory(p, sz) == m["kermit_t"]);
-  REQUIRE(modbus_t::checksum_memory(p, sz) == m["modbus_t"]);
-  REQUIRE(x_25_t::checksum_memory(p, sz) == m["x_25_t"]);
-  REQUIRE(xmodem_t::checksum_memory(p, sz) == m["xmodem_t"]);
-  REQUIRE(default8_t::checksum_memory(p, sz) == m["default8_t"]);
-  REQUIRE(cdma2000_8_t::checksum_memory(p, sz) == m["cdma2000_8_t"]);
-  REQUIRE(darc_t::checksum_memory(p, sz) == m["darc_t"]);
-  REQUIRE(dvb_s2_t::checksum_memory(p, sz) == m["dvb_s2_t"]);
-  REQUIRE(ebu_t::checksum_memory(p, sz) == m["ebu_t"]);
-  REQUIRE(i_code_t::checksum_memory(p, sz) == m["i_code_t"]);
-  REQUIRE(itu_t::checksum_memory(p, sz) == m["itu_t"]);
-  REQUIRE(maxim8_t::checksum_memory(p, sz) == m["maxim8_t"]);
-  REQUIRE(rohc_t::checksum_memory(p, sz) == m["rohc_t"]);
-  REQUIRE(wcdma_t::checksum_memory(p, sz) == m["wcdma_t"]);
-}
+#define TEST_HELPER(type, data, expected)                                      \
+  do {                                                                         \
+    REQUIRE(type::checksum(data) == expected[#type]);                          \
+  } while (0)
 
-TEST_CASE("Testing CRC with naive", "[slow]") {
-  SECTION("CRC32 - small data set") {
-    test_template(t_small.data(), t_small.size(), l_map_4);
-  }
+#define GROUP_TEST_HELPER(data, expected)                                      \
+  do {                                                                         \
+    TEST_HELPER(crc32_default_t, data, expected);                              \
+    TEST_HELPER(bzip2_t, data, expected);                                      \
+    TEST_HELPER(crc32c_t, data, expected);                                     \
+    TEST_HELPER(crc32d_t, data, expected);                                     \
+    TEST_HELPER(mpeg2_t, data, expected);                                      \
+    TEST_HELPER(posix_t, data, expected);                                      \
+    TEST_HELPER(crc32q_t, data, expected);                                     \
+    TEST_HELPER(jamcrc_t, data, expected);                                     \
+    TEST_HELPER(xfer_t, data, expected);                                       \
+    TEST_HELPER(ccitt_t, data, expected);                                      \
+    TEST_HELPER(arc_t, data, expected);                                        \
+    TEST_HELPER(aug_ccitt_t, data, expected);                                  \
+    TEST_HELPER(buypass_t, data, expected);                                    \
+    TEST_HELPER(cdma2000_16_t, data, expected);                                \
+    TEST_HELPER(dds_110_t, data, expected);                                    \
+    TEST_HELPER(dect_r_t, data, expected);                                     \
+    TEST_HELPER(dect_x_t, data, expected);                                     \
+    TEST_HELPER(dnp_t, data, expected);                                        \
+    TEST_HELPER(en_13757_t, data, expected);                                   \
+    TEST_HELPER(genibus_t, data, expected);                                    \
+    TEST_HELPER(maxim16_t, data, expected);                                    \
+    TEST_HELPER(mcrf4xx_t, data, expected);                                    \
+    TEST_HELPER(riello_t, data, expected);                                     \
+    TEST_HELPER(t10_dif_t, data, expected);                                    \
+    TEST_HELPER(teledisk_t, data, expected);                                   \
+    TEST_HELPER(tms37157_t, data, expected);                                   \
+    TEST_HELPER(usb_t, data, expected);                                        \
+    TEST_HELPER(crc16a_t, data, expected);                                     \
+    TEST_HELPER(kermit_t, data, expected);                                     \
+    TEST_HELPER(modbus_t, data, expected);                                     \
+    TEST_HELPER(x_25_t, data, expected);                                       \
+    TEST_HELPER(xmodem_t, data, expected);                                     \
+    TEST_HELPER(default8_t, data, expected);                                   \
+    TEST_HELPER(cdma2000_8_t, data, expected);                                 \
+    TEST_HELPER(darc_t, data, expected);                                       \
+    TEST_HELPER(dvb_s2_t, data, expected);                                     \
+    TEST_HELPER(ebu_t, data, expected);                                        \
+    TEST_HELPER(i_code_t, data, expected);                                     \
+    TEST_HELPER(itu_t, data, expected);                                        \
+    TEST_HELPER(maxim8_t, data, expected);                                     \
+    TEST_HELPER(rohc_t, data, expected);                                       \
+    TEST_HELPER(wcdma_t, data, expected);                                      \
+  } while (0)
+
+TEST_CASE("Testing CRC with LUT", "[fast]") {
+
   SECTION("CRC32 - bigger data set") {
-    test_template(l_lorem_psum.c_str(), l_lorem_psum.size(), l_map_string);
+    GROUP_TEST_HELPER(l_lorem_psum, l_map_string);
   }
+
+  SECTION("CRC32 - small data set") { GROUP_TEST_HELPER(t_small, l_map_4); }
 }

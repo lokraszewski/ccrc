@@ -1,12 +1,11 @@
 # cpp-crc
 
-[![Build Status](https://travis-ci.com/lokraszewski/cpp-crc.svg?branch=master)](https://travis-ci.com/lokraszewski/cpp-crc) [![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/lokraszewski/cpp-crc/tags)
+[![Build Status](https://travis-ci.com/lokraszewski/ccrc.svg?branch=master)](https://travis-ci.com/lokraszewski/ccrc) [![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/lokraszewski/ccrc/tags)
 
 A simple header only CRC class. Currently only supports raw pointers to uint8_t data (bytes).
 
 ## Motivation
-A standalone flexible crc solution with API similiar to that of [boost crc](https://www.boost.org/doc/libs/1_64_0/libs/crc/)
-
+A simple CRC class without external dependancies, I also wanted to make use of `constexpr` to calculate LUTs at compile time.
 
 ### Prerequisites
 * [cmake](https://cmake.org/)
@@ -20,16 +19,29 @@ cmake -DBUILD_TEST=ON -DBUILD_EXAMPLE=ON ..
 make
 ```
 
-## Running the tests
-
 ### Unit tests
-Unit tests are built on [Catch2](https://github.com/catchorg/Catch2). To run:
+Unit tests are built on [Catch2](https://github.com/catchorg/Catch2).
 
 ## Versioning
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/lokraszewski/cpp-crc/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/lokraszewski/ccrc/tags).
 
-## TODOs
-* Add std containers support (iterator containers).
+
+## Usage
+
+
+```C++
+
+#include "crc/crc.h"
+
+using namespace ccrc::lut;
+
+constexpr static std::array<uint8_t, 4> t_small = {{0xDE, 0xAD, 0xBE, 0xEF}};
+
+int main(int argc, char **argv) {
+    std::cout << crc32_default_t::checksum(t_small.data(), t_small.size()) << std::endl;
+}
+```
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
