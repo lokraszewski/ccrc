@@ -13,8 +13,5 @@ target_link_libraries(${PROJECT_NAME}_example
   spdlog::spdlog
 )
 
-set_target_properties(${PROJECT_NAME}_example
-  PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED YES
-)
+target_compile_features(${PROJECT_NAME}_example PRIVATE cxx_std_17)
+

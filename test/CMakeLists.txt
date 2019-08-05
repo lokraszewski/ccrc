@@ -6,11 +6,7 @@ foreach(test_source ${TEST_SOURCES})
 
     add_executable(${test_name} ${test_source} )
 
-    set_target_properties(${test_name}
-        PROPERTIES
-            CXX_STANDARD 17
-            CXX_STANDARD_REQUIRED YES
-    )
+    target_compile_features(${test_name} PRIVATE cxx_std_17)
 
     target_link_libraries(${test_name}
         ${PROJECT_NAME}

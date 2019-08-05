@@ -1,40 +1,43 @@
-os: linux
-dist: trusty
-sudo: required
 language: cpp
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-6.0
-    packages:
-      - g++-7
-      - clang-6.0
-      - cmake
-      - libc++-dev
-      - libc++abi-dev
-
+sudo: false
+dist: trusty
+script:
+  - make
+  - make test
 matrix:
   include:
-    - compiler: clang
-      env: BUILD_TYPE=Debug
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 CXX=g++-7"
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - MATRIX_EVAL="CC=gcc-8 CXX=g++-8"
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-9
+      env:
+        - MATRIX_EVAL="CC=gcc-9 CXX=g++-9"
 
-    - compiler: clang
-      env: BUILD_TYPE=Release
 
-install:
-  - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; fi
-
-
+before_install:
+- eval "${MATRIX_EVAL}"
 script:
   - mkdir build && cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TEST=ON -DBUILD_EXAMPLE=ON .. && make -j
-  - ./bin/bitop_test
-  - ./bin/table_test
-  - ./bin/crc_lut_test
-  - ./bin/crc_naive_test
-  - ./bin/ccrc_example -f ../example/test_data.bin
-  - ./bin/ccrc_example -i "hello world"
-
-
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_ALL=ON .. && make -j
+  - ../run_all_tests.sh
