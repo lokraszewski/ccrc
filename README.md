@@ -1,6 +1,6 @@
 # cpp-crc
 
-[![Build Status](https://travis-ci.com/lokraszewski/ccrc.svg?branch=master)](https://travis-ci.com/lokraszewski/ccrc) [![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/lokraszewski/ccrc/tags)
+[![Build Status](https://travis-ci.com/lokraszewski/ccrc.svg?branch=master)](https://travis-ci.com/lokraszewski/ccrc) [![Version](https://img.shields.io/badge/version-1.3.3-blue.svg)](https://github.com/lokraszewski/ccrc/tags)
 
 A simple header only CRC class. Currently only supports raw pointers to uint8_t data (bytes).
 
