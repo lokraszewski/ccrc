@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.9)
 include(ExternalProject)
 
 project(ccrc
-  VERSION 1.3.0
+  VERSION 1.3.1
   LANGUAGES CXX
   )
 
@@ -21,6 +21,7 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+option(BUILD_ALL "Enable building everything" OFF)
 option(BUILD_TEST "Enable building tests" OFF)
 option(BUILD_EXAMPLE "Enable building example app." OFF)
 
@@ -44,12 +45,12 @@ add_definitions(
 
 add_subdirectory(${PROJECT_NAME})
 
-if(BUILD_TEST)
+if(BUILD_TEST OR BUILD_ALL)
     add_subdirectory(third_party/catch2)
     add_subdirectory(test)
-endif(BUILD_TEST)
+endif()
 
-if(BUILD_EXAMPLE)
+if(BUILD_EXAMPLE OR BUILD_ALL)
     add_subdirectory(third_party/spdlog)
     add_subdirectory(example)
-endif(BUILD_EXAMPLE)
+endif()

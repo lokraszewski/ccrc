@@ -67,60 +67,60 @@ template <> const char *TypeName<wcdma_t>::name = "wcdma_t";
 
 static auto l_log = spdlog::stdout_color_mt("crc");
 
-template <typename crc_t>
-void checksum_and_print(const uint8_t *buffer, const size_t size) {
+// template <typename crc_t>
+// void checksum_and_print(const uint8_t *buffer, const size_t size) {
 
-  const auto res = crc_t::checksum_memory(buffer, size);
-  l_log->info("{:>16} : {:#x}", TypeName<crc_t>::name, res);
-}
+//   const auto res = crc_t::checksum(buffer, size);
+//   l_log->info("{:>16} : {:#x}", TypeName<crc_t>::name, res);
+// }
 
-int checksum_all(const uint8_t *buffer, const size_t size) {
-  l_log->info("Running checksums on {} bytes", size);
-  checksum_and_print<crc32_default_t>(buffer, size);
-  checksum_and_print<bzip2_t>(buffer, size);
-  checksum_and_print<crc32c_t>(buffer, size);
-  checksum_and_print<crc32d_t>(buffer, size);
-  checksum_and_print<mpeg2_t>(buffer, size);
-  checksum_and_print<posix_t>(buffer, size);
-  checksum_and_print<crc32q_t>(buffer, size);
-  checksum_and_print<jamcrc_t>(buffer, size);
-  checksum_and_print<xfer_t>(buffer, size);
-  checksum_and_print<ccitt_t>(buffer, size);
-  checksum_and_print<arc_t>(buffer, size);
-  checksum_and_print<aug_ccitt_t>(buffer, size);
-  checksum_and_print<buypass_t>(buffer, size);
-  checksum_and_print<cdma2000_16_t>(buffer, size);
-  checksum_and_print<dds_110_t>(buffer, size);
-  checksum_and_print<dect_r_t>(buffer, size);
-  checksum_and_print<dect_x_t>(buffer, size);
-  checksum_and_print<dnp_t>(buffer, size);
-  checksum_and_print<en_13757_t>(buffer, size);
-  checksum_and_print<genibus_t>(buffer, size);
-  checksum_and_print<maxim16_t>(buffer, size);
-  checksum_and_print<mcrf4xx_t>(buffer, size);
-  checksum_and_print<riello_t>(buffer, size);
-  checksum_and_print<t10_dif_t>(buffer, size);
-  checksum_and_print<teledisk_t>(buffer, size);
-  checksum_and_print<tms37157_t>(buffer, size);
-  checksum_and_print<usb_t>(buffer, size);
-  checksum_and_print<crc16a_t>(buffer, size);
-  checksum_and_print<kermit_t>(buffer, size);
-  checksum_and_print<modbus_t>(buffer, size);
-  checksum_and_print<x_25_t>(buffer, size);
-  checksum_and_print<xmodem_t>(buffer, size);
-  checksum_and_print<default8_t>(buffer, size);
-  checksum_and_print<cdma2000_8_t>(buffer, size);
-  checksum_and_print<darc_t>(buffer, size);
-  checksum_and_print<dvb_s2_t>(buffer, size);
-  checksum_and_print<ebu_t>(buffer, size);
-  checksum_and_print<i_code_t>(buffer, size);
-  checksum_and_print<itu_t>(buffer, size);
-  checksum_and_print<maxim8_t>(buffer, size);
-  checksum_and_print<rohc_t>(buffer, size);
-  checksum_and_print<wcdma_t>(buffer, size);
+// int checksum_all(const uint8_t *buffer, const size_t size) {
+//   l_log->info("Running checksums on {} bytes", size);
+//   checksum_and_print<crc32_default_t>(buffer, size);
+//   checksum_and_print<bzip2_t>(buffer, size);
+//   checksum_and_print<crc32c_t>(buffer, size);
+//   checksum_and_print<crc32d_t>(buffer, size);
+//   checksum_and_print<mpeg2_t>(buffer, size);
+//   checksum_and_print<posix_t>(buffer, size);
+//   checksum_and_print<crc32q_t>(buffer, size);
+//   checksum_and_print<jamcrc_t>(buffer, size);
+//   checksum_and_print<xfer_t>(buffer, size);
+//   checksum_and_print<ccitt_t>(buffer, size);
+//   checksum_and_print<arc_t>(buffer, size);
+//   checksum_and_print<aug_ccitt_t>(buffer, size);
+//   checksum_and_print<buypass_t>(buffer, size);
+//   checksum_and_print<cdma2000_16_t>(buffer, size);
+//   checksum_and_print<dds_110_t>(buffer, size);
+//   checksum_and_print<dect_r_t>(buffer, size);
+//   checksum_and_print<dect_x_t>(buffer, size);
+//   checksum_and_print<dnp_t>(buffer, size);
+//   checksum_and_print<en_13757_t>(buffer, size);
+//   checksum_and_print<genibus_t>(buffer, size);
+//   checksum_and_print<maxim16_t>(buffer, size);
+//   checksum_and_print<mcrf4xx_t>(buffer, size);
+//   checksum_and_print<riello_t>(buffer, size);
+//   checksum_and_print<t10_dif_t>(buffer, size);
+//   checksum_and_print<teledisk_t>(buffer, size);
+//   checksum_and_print<tms37157_t>(buffer, size);
+//   checksum_and_print<usb_t>(buffer, size);
+//   checksum_and_print<crc16a_t>(buffer, size);
+//   checksum_and_print<kermit_t>(buffer, size);
+//   checksum_and_print<modbus_t>(buffer, size);
+//   checksum_and_print<x_25_t>(buffer, size);
+//   checksum_and_print<xmodem_t>(buffer, size);
+//   checksum_and_print<default8_t>(buffer, size);
+//   checksum_and_print<cdma2000_8_t>(buffer, size);
+//   checksum_and_print<darc_t>(buffer, size);
+//   checksum_and_print<dvb_s2_t>(buffer, size);
+//   checksum_and_print<ebu_t>(buffer, size);
+//   checksum_and_print<i_code_t>(buffer, size);
+//   checksum_and_print<itu_t>(buffer, size);
+//   checksum_and_print<maxim8_t>(buffer, size);
+//   checksum_and_print<rohc_t>(buffer, size);
+//   checksum_and_print<wcdma_t>(buffer, size);
 
-  return 0;
-}
+//   return 0;
+// }
 
 int main(int argc, char **argv) {
   static cxxopts::Options options("crc_example", "Example crc usage.");
@@ -132,32 +132,33 @@ int main(int argc, char **argv) {
                         cxxopts::value<std::string>());
 
   auto result = options.parse(argc, argv);
-  auto file_input_flag = result.count("f");
-  auto string_input_flag = result.count("i");
+  (void)result;
+  // auto file_input_flag = result.count("f");
+  // auto string_input_flag = result.count("i");
 
-  if (result.count("help") || (!file_input_flag && !string_input_flag)) {
-    std::cout << options.help({"", "Group"}) << std::endl;
-    exit(0);
-  }
+  // if (result.count("help") || (!file_input_flag && !string_input_flag)) {
+  //   std::cout << options.help({"", "Group"}) << std::endl;
+  //   exit(0);
+  // }
 
-  if (file_input_flag) {
-    auto &filename = result["f"].as<std::string>();
-    l_log->info("Attempting to checksum file : '{}'", filename);
-    std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
-    std::ifstream::pos_type pos = ifs.tellg();
-    std::vector<char> result(pos);
-    ifs.seekg(0, std::ios::beg);
-    ifs.read(&result[0], pos);
-    l_log->info("{} bytes read", result.size());
-    return checksum_all((const uint8_t *)result.data(), result.size());
-  }
+  // if (file_input_flag) {
+  //   auto &filename = result["f"].as<std::string>();
+  //   l_log->info("Attempting to checksum file : '{}'", filename);
+  //   std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
+  //   std::ifstream::pos_type pos = ifs.tellg();
+  //   std::vector<char> result(pos);
+  //   ifs.seekg(0, std::ios::beg);
+  //   ifs.read(&result[0], pos);
+  //   l_log->info("{} bytes read", result.size());
+  //   return checksum_all((const uint8_t *)result.data(), result.size());
+  // }
 
-  if (string_input_flag) {
-    auto &user_string = result["i"].as<std::string>();
-    l_log->info("Attempting to checksum string : '{}'", user_string);
-    return checksum_all((const uint8_t *)user_string.c_str(),
-                        user_string.size());
-  }
+  // if (string_input_flag) {
+  //   auto &user_string = result["i"].as<std::string>();
+  //   l_log->info("Attempting to checksum string : '{}'", user_string);
+  //   return checksum_all((const uint8_t *)user_string.c_str(),
+  //                       user_string.size());
+  // }
 
   return 0;
 }

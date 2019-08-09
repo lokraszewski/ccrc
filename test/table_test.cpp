@@ -14,7 +14,7 @@
                           // in one cpp file
 #include <catch2/catch.hpp>
 
-using namespace ccrc::lut;
+using namespace ccrc;
 
 constexpr static std::array<uint16_t, 0x100> crc_lut_check = {
     {0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7, 0x8108,
