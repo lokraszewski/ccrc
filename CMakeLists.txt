@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.9)
 include(ExternalProject)
 
 project(ccrc
-  VERSION 1.3.1
+  VERSION 1.3.2
   LANGUAGES CXX
   )
 
