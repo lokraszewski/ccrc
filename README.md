@@ -1,6 +1,6 @@
 # cpp-crc
 
-[![Build Status](https://travis-ci.com/lokraszewski/ccrc.svg?branch=master)](https://travis-ci.com/lokraszewski/ccrc) [![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/lokraszewski/ccrc/tags)
+[![Build Status](https://travis-ci.com/lokraszewski/ccrc.svg?branch=master)](https://travis-ci.com/lokraszewski/ccrc) [![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/lokraszewski/ccrc/tags)
 
 A simple header only CRC class. Currently only supports raw pointers to uint8_t data (bytes).
 
@@ -35,10 +35,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 using namespace ccrc::lut;
 
-constexpr static std::array<uint8_t, 4> t_small = {{0xDE, 0xAD, 0xBE, 0xEF}};
 
 int main(int argc, char **argv) {
-    std::cout << crc32_default_t::checksum(t_small.data(), t_small.size()) << std::endl;
+    constexpr static std::array<uint8_t, 4> t_small = {{0xDE, 0xAD, 0xBE, 0xEF}};
+    std::cout << crc32_default_t::checksum(t_small) << std::endl;
 }
 ```
 
