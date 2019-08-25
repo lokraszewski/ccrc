@@ -8,8 +8,8 @@
 #pragma once
 
 #include "bitop.h"
-#include "crc_base.h"
-#include "crc_lut.h"
+#include "base.h"
+#include "lut.h"
 #include <cstddef> //size_t
 #include <limits>
 #include <stdint.h>

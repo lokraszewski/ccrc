@@ -4,8 +4,8 @@
  * @Last Modified time: 05-12-2018
  */
 #pragma once
-#include "crc_base.h"
-#include "crc_fast.h"
+#include "base.h"
+#include "fast.h"
 
 namespace ccrc {
 

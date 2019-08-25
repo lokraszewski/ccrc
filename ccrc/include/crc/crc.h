@@ -8,6 +8,6 @@
 #pragma once
 
 #include "alias.h"
-#include "crc_base.h"
-#include "crc_fast.h"
-#include "crc_lut.h"
+#include "base.h"
+#include "fast.h"
+#include "lut.h"
