@@ -1,8 +1,8 @@
-# cpp-crc
+# ccrc (C++ CRC)
 
 [![Build Status](https://travis-ci.com/lokraszewski/ccrc.svg?branch=master)](https://travis-ci.com/lokraszewski/ccrc) [![Version](https://img.shields.io/badge/version-1.3.3-blue.svg)](https://github.com/lokraszewski/ccrc/tags)
 
-A simple header only CRC class. Currently only supports raw pointers to uint8_t data (bytes).
+A simple header only CRC class. 
 
 ## Motivation
 A simple CRC class without external dependancies, I also wanted to make use of `constexpr` to calculate LUTs at compile time.
@@ -90,7 +90,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 #include "crc/crc.h"
 
-using namespace ccrc::lut;
+//  using namespace ccrc::base; // Classic byte wise CRC, good if you cannot afford memory req.
+using namespace ccrc::fast; //Table based, size depends on the checksum used.
 
 int main(int argc, char **argv) {
     constexpr static std::array<uint8_t, 4> t_small = {{0xDE, 0xAD, 0xBE, 0xEF}};
