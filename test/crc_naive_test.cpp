@@ -16,7 +16,7 @@
                           // in one cpp file
 #include <catch2/catch.hpp>
 
-using namespace ccrc::slow;
+using namespace ccrc::base;
 
 const static std::string l_lorem_psum =
     "Lorem ipsum dolor sit amet, condimentum id, quia ut enim. Congue lacus "

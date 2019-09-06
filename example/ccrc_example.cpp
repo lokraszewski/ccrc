@@ -18,10 +18,15 @@
 #include <stdint.h>
 #include <string>
 
-using namespace ccrc::lut;
+//Switch namespace if you want to use a different approach.
+// using namespace ccrc::base; 
+using namespace ccrc::fast;
 
 static auto l_log = spdlog::stdout_color_mt("crc");
-
+using my_crc = crc<uint16_t, 0xDEAD, 0xBEEF>;
+/**
+ * @brief      Macro print the checksum and give it a type name because I am lazy.
+ */
 #define EXAMPLE_HELPER(type, data)                                             \
   do {                                                                         \
     const auto r = type::checksum(data);                                       \
@@ -29,6 +34,7 @@ static auto l_log = spdlog::stdout_color_mt("crc");
   } while (0)
 
 template <typename container> int checksum_all(container buffer) {
+  EXAMPLE_HELPER(my_crc, buffer);
   EXAMPLE_HELPER(crc32_default_t, buffer);
   EXAMPLE_HELPER(bzip2_t, buffer);
   EXAMPLE_HELPER(crc32c_t, buffer);
@@ -90,10 +96,7 @@ int main(int argc, char **argv) {
 
   if (result.count("help") || (!file_input_flag && !string_input_flag)) {
     std::cout << options.help({"", "Group"}) << std::endl;
-    exit(0);
-  }
-
-  if (file_input_flag) {
+  }else  if (file_input_flag) {
     auto &filename = result["f"].as<std::string>();
     l_log->info("Attempting to checksum file : '{}'", filename);
     std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
@@ -103,9 +106,7 @@ int main(int argc, char **argv) {
     ifs.read(&result[0], pos);
     l_log->info("{} bytes read", result.size());
     return checksum_all(result);
-  }
-
-  if (string_input_flag) {
+  }else if (string_input_flag) {
     auto &user_string = result["i"].as<std::string>();
     l_log->info("Attempting to checksum string : '{}'", user_string);
     return checksum_all(user_string);

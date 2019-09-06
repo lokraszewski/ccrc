@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <type_traits>
 
-namespace ccrc {
+namespace ccrc::base {
 
 /**
  * @brief      Class for crc.
@@ -22,16 +22,16 @@ namespace ccrc {
  * @tparam     crc_t    Base crc type, uint32_t, uint16_t or uint8_t typically.
  * @tparam     POLY     Polynomial value to use
  * @tparam     SEED     Seed value to use
- * @tparam     XOR_OUT  { description }
- * @tparam     REF_IN   { description }
- * @tparam     REF_OUT  { description }
+ * @tparam     XOR_OUT  Value to XOR the CRC before returning it.
+ * @tparam     REF_IN   Reflect the bits of the input on reading
+ * @tparam     REF_OUT  Reflect the final result.
  *
- * @details    { detailed_item_description }
+ * @details    Basic CRC computation using a byte wise algorithm.
  */
 template <typename crc_t, crc_t POLY,
           crc_t SEED = std::numeric_limits<crc_t>::max, crc_t XOR_OUT = 0,
           bool REF_IN = false, bool REF_OUT = false>
-class crc_naive {
+class crc {
   using size_type = size_t;
   static constexpr std::size_t WIDTH = std::numeric_limits<crc_t>::digits;
   static constexpr std::size_t BYTE_WIDTH =
@@ -40,8 +40,8 @@ class crc_naive {
 
 protected:
 public:
-  crc_naive(const crc_naive &) = delete;  // Disable copy constructor
-  crc_naive(const crc_naive &&) = delete; // Disable move constructor
+  crc(const crc &) = delete;  // Disable copy constructor
+  crc(const crc &&) = delete; // Disable move constructor
 
   /**
    * @brief      Checksum for iterable byte containers (such as array<uint8_t>)
