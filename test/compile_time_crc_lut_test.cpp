@@ -16,7 +16,7 @@
                           // in one cpp file
 #include <catch2/catch.hpp>
 
-using namespace ccrc::lut;
+using namespace ccrc::fast;
 
 constexpr static std::array<uint8_t, 4> raw_array = {{0xDE, 0xAD, 0xBE, 0xEF}};
 

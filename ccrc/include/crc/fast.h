@@ -14,7 +14,7 @@
 #include <limits>
 #include <stdint.h>
 
-namespace ccrc {
+namespace ccrc::fast {
 
 /**
  * @brief      Class for crc.
@@ -26,7 +26,7 @@ namespace ccrc {
 template <typename crc_t, crc_t POLY,
           crc_t SEED = std::numeric_limits<crc_t>::max, crc_t XOR_OUT = 0,
           bool REF_IN = false, bool REF_OUT = false>
-class crc_lut : public crc_naive<crc_t, POLY, SEED, XOR_OUT, REF_IN, REF_OUT> {
+class crc : public ccrc::base::crc<crc_t, POLY, SEED, XOR_OUT, REF_IN, REF_OUT> {
   using size_type = size_t;
   static constexpr std::size_t WIDTH = std::numeric_limits<crc_t>::digits;
   static constexpr std::size_t BYTE_WIDTH =
@@ -38,8 +38,8 @@ private:
 
 protected:
 public:
-  crc_lut(const crc_lut &) = delete;  // Disable copy constructor
-  crc_lut(const crc_lut &&) = delete; // Disable move constructor
+  crc(const crc &) = delete;  // Disable copy constructor
+  crc(const crc &&) = delete; // Disable move constructor
 
   static constexpr crc_t checksum_byte(const uint8_t byte,
                                        const crc_t seed = SEED) {
